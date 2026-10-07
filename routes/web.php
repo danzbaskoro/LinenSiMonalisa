@@ -38,11 +38,12 @@ Route::get('/', [HomepageController::class, 'viewHome'])->name('daftar-steril');
 
 Route::prefix('homepage')->group(function () {
     Route::get('daftar-steril-homepage', [HomepageController::class, 'getDataSteril']);
-     Route::get('/cetak-form-steril/{kodeSteril}', [HomepageController::class, 'cetakFormSteril']);
-     Route::get('view-detail-data-steril/{kodeSteril}', [HomepageController::class, 'viewDetailDataSteril']);
-     Route::get('detail-alat-steril/{kodeSteril}', [HomepageController::class, 'detailDataAlatSteril']);
-     Route::get('view-ajuan-data-steril', [HomepageController::class, 'viewAjuanSteril'])->name('ajuan-steril');
-     Route::post('tambah-ajuan-steril', [HomepageController::class, 'simpanAjuanSteril']);
+    Route::get('/cetak-form-steril/{kodeSteril}', [HomepageController::class, 'cetakFormSteril']);
+    Route::get('view-detail-data-steril/{kodeSteril}', [HomepageController::class, 'viewDetailDataSteril']);
+    Route::get('detail-alat-steril/{kodeSteril}', [HomepageController::class, 'detailDataAlatSteril']);
+    Route::get('view-ajuan-data-steril', [HomepageController::class, 'viewAjuanSteril'])->name('ajuan-steril');
+    Route::post('tambah-ajuan-steril', [HomepageController::class, 'simpanAjuanSteril']);
+    Route::get('view-ajuan-data-laundry', [HomepageController::class, 'viewAjuanLaundry'])->name('ajuan-laundry');
 });
 
 Route::get('login', [LoginController::class, 'login'])->name('login');
@@ -103,7 +104,4 @@ Route::prefix('laporan')->group(function () {
 
 Route::prefix('grafik')->group(function () {
     Route::get('view-grafik', [GrafikController::class, 'viewGrafik'])->name('grafik');
-    
-   
 });
-

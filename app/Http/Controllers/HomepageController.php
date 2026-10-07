@@ -250,10 +250,17 @@ class HomepageController extends Controller
         $result = array('draw' => $draw, 'recordsTotal' => $total, 'recordsFiltered' => $total, 'data' => $ls);
         return response()->json($result);
     }
+
     public function viewAjuanSteril(Request $request)
     {
         return view('homepage.ajuan-steril-homepage');
     }
+
+    public function viewAjuanLaundry(Request $request)
+    {
+        return view('homepage.ajuan-laundry-homepage');
+    }
+
     public function simpanAjuanSteril(Request $request)
     {
         $dataAjuanSteril = $request->dataAjuanSteril;
