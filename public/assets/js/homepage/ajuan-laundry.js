@@ -206,13 +206,13 @@ KTUtil.onDOMContentLoaded(function() {
         
     });
     //end
-    $('#repeater_steril_ajuan').repeater({
+    $('#repeater_ajuan_laundry').repeater({
         initEmpty: false,
 
         ready: function () {
-            var elementAlat = 'repeater_steril_ajuan[0][alatSterilAjuan]';
-            var elementjenisAlat = 'repeater_steril_ajuan[0][jenisAlatAjuan]';
-            var elementjmlAlat = 'repeater_steril_ajuan[0][jumlahAlatAjuan]';
+            var elementAlat = 'repeater_ajuan_laundry[0][alatSterilAjuan]';
+            var elementjenisAlat = 'repeater_ajuan_laundry[0][jenisAlatAjuan]';
+            var elementjmlAlat = 'repeater_ajuan_laundry[0][jumlahAlatAjuan]';
 
              
             $('#ajuan_steril[name="' + elementAlat + '"]').select2({
@@ -259,9 +259,9 @@ KTUtil.onDOMContentLoaded(function() {
         show: function () {
             var index = $(this).closest('[data-repeater-item]').index();
             
-            var elementAlat = 'repeater_steril_ajuan[' + index + '][alatSterilAjuan]';
-            var elementjenisAlat = 'repeater_steril_ajuan[' + index + '][jenisAlatAjuan]';
-            var elementjmlAlat = 'repeater_steril_ajuan[' + index + '][jumlahAlatAjuan]';
+            var elementAlat = 'repeater_ajuan_laundry[' + index + '][alatSterilAjuan]';
+            var elementjenisAlat = 'repeater_ajuan_laundry[' + index + '][jenisAlatAjuan]';
+            var elementjmlAlat = 'repeater_ajuan_laundry[' + index + '][jumlahAlatAjuan]';
 
             $(this).slideDown(function () {
                 if (index != 0) {
@@ -333,7 +333,7 @@ function simpanAjuanSteril() {
     ttdUnitPengirimPic = urlTtdUnitPengirim.replace(/^data:image\/[a-z]+;base64,/, "");
 
     var ajuanalatSterilList = [];
-    var dataTableSterilAjuan = $('#repeater_steril_ajuan').repeaterVal().repeater_steril_ajuan;
+    var dataTableSterilAjuan = $('#repeater_ajuan_laundry').repeaterVal().repeater_ajuan_laundry;
     if (dataTableSterilAjuan.length > 0) {
         for (var i = 0; i < dataTableSterilAjuan.length; i++) {
             var sterilData = {

@@ -95,8 +95,8 @@
                     <!--end::Input group-->
                     <div class="separator d-flex flex-center mb-8"></div>
                     <!--begin::Input group-->
-                    <div id="repeater_steril_ajuan">
-                        <div data-repeater-list="repeater_steril_ajuan">
+                    <div id="repeater_ajuan_laundry">
+                        <div data-repeater-list="repeater_ajuan_laundry">
                             <div data-repeater-item>
                                 <div class="row g-9 mb-8">
                                     <div class="col-md-1 text-center">
@@ -152,7 +152,7 @@
                     
                             <div class="row g-9 mb-8">
                                 <div class="col-md-3 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Tambah Alat</label>
+                                    <label class="fs-6 fw-semibold mb-2">Tambah Barang</label>
                                     <!--begin::Input-->
                                     <div class="position-relative d-flex align-items-center">
                                         
