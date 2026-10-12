@@ -23,15 +23,25 @@ use App\Http\Controllers\DashboardController;
 Route::get('/', function () {
     return view('layout/main');
 });
-Route::get('/dashboard', [DashboardController::class, 'viewDashboard'])->name('dashboard');
 
-Route::prefix('dashboard')->group(function () {
+Route::get('/dashboard', [DashboardController::class, 'viewDashboard'])->middleware('auth')->name('dashboard');
+
+Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('steril-bulanan/data', [DashboardController::class, 'grafikSterilBulanan']);
     Route::get('list-alat-kadaluarsa', [DashboardController::class, 'getDataAlatKadaluarsa']);
     Route::get('view-steril-ulang/{kodeSteril}', [DashboardController::class, 'getViewSterilUlang']);
     Route::get('detail-alat-steril/{kodeSteril}', [DashboardController::class, 'detailDataAlatSteril']);
     Route::post('edit-data-steril-alat-kadaluarsa', [DashboardController::class, 'editDataSterilAlatKadaluarsa']);
 });
+// **BACKUP */
+// Route::prefix('dashboard')->group(function () {
+//     Route::get('steril-bulanan/data', [DashboardController::class, 'grafikSterilBulanan']);
+//     Route::get('list-alat-kadaluarsa', [DashboardController::class, 'getDataAlatKadaluarsa']);
+//     Route::get('view-steril-ulang/{kodeSteril}', [DashboardController::class, 'getViewSterilUlang']);
+//     Route::get('detail-alat-steril/{kodeSteril}', [DashboardController::class, 'detailDataAlatSteril']);
+//     Route::post('edit-data-steril-alat-kadaluarsa', [DashboardController::class, 'editDataSterilAlatKadaluarsa']);
+// });
+//** END BACKUP */
 
 Route::get('/', [HomepageController::class, 'viewHome'])->name('daftar-steril');
 // Route::get('/dashboard/main', [HomepageController::class, 'viewHome'])->name('daftar-steril');
