@@ -36,157 +36,160 @@ KTUtil.onDOMContentLoaded(function() {
             alert('Gagal memuat data ruangan.');
         }
     });
-    $('#petugas_cssd').select2().on('change', function() {
-        // Revalidate the field when an option is chosen
+//**belum tau dipake dmn? */
+    // $('#petugas_cssd').select2().on('change', function() {
+    //     // Revalidate the field when an option is chosen
        
-    });
+    // });
      // Memuat data ke dropdown
-     $.ajax({
-        type: 'GET', // Metode HTTP
-        headers: header,
-        url: '/steril/list-user-cssd',
-        success: function(data) {
-            if (data.result == true) {
-                // console.log(data.data);
-                var option4 = '<option value="">PILIH USER</option>';
-                for (var i = 0; i < data.data.length; i++) {
-                    option4 += '<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>';
-                }
-                $('#petugas_cssd').html(option4);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('Error saat mengambil data:', error);
-            alert('Gagal memuat data ruangan.');
-        }
-    });
+    //  $.ajax({
+    //     type: 'GET', // Metode HTTP
+    //     headers: header,
+    //     url: '/steril/list-user-cssd',
+    //     success: function(data) {
+    //         if (data.result == true) {
+    //             // console.log(data.data);
+    //             var option4 = '<option value="">PILIH USER</option>';
+    //             for (var i = 0; i < data.data.length; i++) {
+    //                 option4 += '<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>';
+    //             }
+    //             $('#petugas_cssd').html(option4);
+    //         }
+    //     },
+    //     error: function(xhr, status, error) {
+    //         console.error('Error saat mengambil data:', error);
+    //         alert('Gagal memuat data ruangan.');
+    //     }
+    // });
 
-    $('#petugas_pencucian').select2().on('change', function() {
-        // Revalidate the field when an option is chosen
+    // $('#petugas_pencucian').select2().on('change', function() {
+    //     // Revalidate the field when an option is chosen
        
-    });
-     // Memuat data ke dropdown
-     $.ajax({
-        type: 'GET', // Metode HTTP
-        headers: header,
-        url: '/steril/list-user-cssd',
-        success: function(data) {
-            if (data.result == true) {
-                // console.log(data.data);
-                var option4 = '<option value="">PILIH USER</option>';
-                for (var i = 0; i < data.data.length; i++) {
-                    option4 += '<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>';
-                }
-                $('#petugas_pencucian').html(option4);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('Error saat mengambil data:', error);
-            alert('Gagal memuat data ruangan.');
-        }
-    });
+    // });
+    //  // Memuat data ke dropdown
+    //  $.ajax({
+    //     type: 'GET', // Metode HTTP
+    //     headers: header,
+    //     url: '/steril/list-user-cssd',
+    //     success: function(data) {
+    //         if (data.result == true) {
+    //             // console.log(data.data);
+    //             var option4 = '<option value="">PILIH USER</option>';
+    //             for (var i = 0; i < data.data.length; i++) {
+    //                 option4 += '<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>';
+    //             }
+    //             $('#petugas_pencucian').html(option4);
+    //         }
+    //     },
+    //     error: function(xhr, status, error) {
+    //         console.error('Error saat mengambil data:', error);
+    //         alert('Gagal memuat data ruangan.');
+    //     }
+    // });
 
-    $('#petugas_packing').select2().on('change', function() {
-        // Revalidate the field when an option is chosen
+    // $('#petugas_packing').select2().on('change', function() {
+    //     // Revalidate the field when an option is chosen
        
-    });
-     // Memuat data ke dropdown
-     $.ajax({
-        type: 'GET', // Metode HTTP
-        headers: header,
-        url: '/steril/list-user-cssd',
-        success: function(data) {
-            if (data.result == true) {
-                // console.log(data.data);
-                var option4 = '<option value="">PILIH USER</option>';
-                for (var i = 0; i < data.data.length; i++) {
-                    option4 += '<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>';
-                }
-                $('#petugas_packing').html(option4);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('Error saat mengambil data:', error);
-            alert('Gagal memuat data ruangan.');
-        }
-    });
+    // });
+    //  // Memuat data ke dropdown
+    //  $.ajax({
+    //     type: 'GET', // Metode HTTP
+    //     headers: header,
+    //     url: '/steril/list-user-cssd',
+    //     success: function(data) {
+    //         if (data.result == true) {
+    //             // console.log(data.data);
+    //             var option4 = '<option value="">PILIH USER</option>';
+    //             for (var i = 0; i < data.data.length; i++) {
+    //                 option4 += '<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>';
+    //             }
+    //             $('#petugas_packing').html(option4);
+    //         }
+    //     },
+    //     error: function(xhr, status, error) {
+    //         console.error('Error saat mengambil data:', error);
+    //         alert('Gagal memuat data ruangan.');
+    //     }
+    // });
 
-    $('#petugas_operator').select2().on('change', function() {
-        // Revalidate the field when an option is chosen
+    // $('#petugas_operator').select2().on('change', function() {
+    //     // Revalidate the field when an option is chosen
        
-    });
-     // Memuat data ke dropdown
-     $.ajax({
-        type: 'GET', // Metode HTTP
-        headers: header,
-        url: '/steril/list-user-cssd',
-        success: function(data) {
-            if (data.result == true) {
-                // console.log(data.data);
-                var option4 = '<option value="">PILIH USER</option>';
-                for (var i = 0; i < data.data.length; i++) {
-                    option4 += '<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>';
-                }
-                $('#petugas_operator').html(option4);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('Error saat mengambil data:', error);
-            alert('Gagal memuat data ruangan.');
-        }
-    });
+    // });
+    //  // Memuat data ke dropdown
+    //  $.ajax({
+    //     type: 'GET', // Metode HTTP
+    //     headers: header,
+    //     url: '/steril/list-user-cssd',
+    //     success: function(data) {
+    //         if (data.result == true) {
+    //             // console.log(data.data);
+    //             var option4 = '<option value="">PILIH USER</option>';
+    //             for (var i = 0; i < data.data.length; i++) {
+    //                 option4 += '<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>';
+    //             }
+    //             $('#petugas_operator').html(option4);
+    //         }
+    //     },
+    //     error: function(xhr, status, error) {
+    //         console.error('Error saat mengambil data:', error);
+    //         alert('Gagal memuat data ruangan.');
+    //     }
+    // });
 
-    $('#petugas_check').select2().on('change', function() {
-        // Revalidate the field when an option is chosen
+    // $('#petugas_check').select2().on('change', function() {
+    //     // Revalidate the field when an option is chosen
        
-    });
-     // Memuat data ke dropdown
-     $.ajax({
-        type: 'GET', // Metode HTTP
-        headers: header,
-        url: '/steril/list-user-cssd',
-        success: function(data) {
-            if (data.result == true) {
-                // console.log(data.data);
-                var option4 = '<option value="">PILIH USER</option>';
-                for (var i = 0; i < data.data.length; i++) {
-                    option4 += '<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>';
-                }
-                $('#petugas_check').html(option4);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('Error saat mengambil data:', error);
-            alert('Gagal memuat data ruangan.');
-        }
-    });
+    // });
+    //  // Memuat data ke dropdown
+    //  $.ajax({
+    //     type: 'GET', // Metode HTTP
+    //     headers: header,
+    //     url: '/steril/list-user-cssd',
+    //     success: function(data) {
+    //         if (data.result == true) {
+    //             // console.log(data.data);
+    //             var option4 = '<option value="">PILIH USER</option>';
+    //             for (var i = 0; i < data.data.length; i++) {
+    //                 option4 += '<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>';
+    //             }
+    //             $('#petugas_check').html(option4);
+    //         }
+    //     },
+    //     error: function(xhr, status, error) {
+    //         console.error('Error saat mengambil data:', error);
+    //         alert('Gagal memuat data ruangan.');
+    //     }
+    // });
 
-    $('#petugas_cssd_pengembalian').select2().on('change', function() {
-        // Revalidate the field when an option is chosen
+    // $('#petugas_cssd_pengembalian').select2().on('change', function() {
+    //     // Revalidate the field when an option is chosen
        
-    });
-     // Memuat data ke dropdown
-     $.ajax({
-        type: 'GET', // Metode HTTP
-        headers: header,
-        url: '/steril/list-user-cssd',
-        success: function(data) {
-            if (data.result == true) {
-                // console.log(data.data);
-                var option4 = '<option value="">PILIH USER</option>';
-                for (var i = 0; i < data.data.length; i++) {
-                    option4 += '<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>';
-                }
-                $('#petugas_cssd_pengembalian').html(option4);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.error('Error saat mengambil data:', error);
-            alert('Gagal memuat data ruangan.');
-        }
-    });
+    // });
+    //  // Memuat data ke dropdown
+    //  $.ajax({
+    //     type: 'GET', // Metode HTTP
+    //     headers: header,
+    //     url: '/steril/list-user-cssd',
+    //     success: function(data) {
+    //         if (data.result == true) {
+    //             // console.log(data.data);
+    //             var option4 = '<option value="">PILIH USER</option>';
+    //             for (var i = 0; i < data.data.length; i++) {
+    //                 option4 += '<option value="' + data.data[i].id + '">' + data.data[i].name + '</option>';
+    //             }
+    //             $('#petugas_cssd_pengembalian').html(option4);
+    //         }
+    //     },
+    //     error: function(xhr, status, error) {
+    //         console.error('Error saat mengambil data:', error);
+    //         alert('Gagal memuat data ruangan.');
+    //     }
+    // });
+    //** END  */
+
     //pad tandatangan
-    let canvasLokalisTtdUnitPengiriman = $("#canvas_pengiriman_alat");
+    let canvasLokalisTtdUnitPengiriman = $("#canvas_pengiriman_linen");
     let widthLokalisTtdUnitPengiriman = "480px";
     let heightLokalisTtdUnitPengiriman = "360px"
     canvasLokalisTtdUnitPengiriman
@@ -196,48 +199,47 @@ KTUtil.onDOMContentLoaded(function() {
         backgroundColor: 'rgb(255, 255, 255)',
         minWidth: 0.5,
         maxWidth: 1.5
-        
     });
 
-    
-
-    $('#btn_clear_canvas_pengiriman_alat').click(function (e) { 
+    $('#btn_clear_canvas_pengiriman_linen').click(function (e) { 
         signaturePadTtdUnitPengirim.clear();
         
     });
     //end
+
     $('#repeater_ajuan_laundry').repeater({
         initEmpty: false,
 
         ready: function () {
-            var elementAlat = 'repeater_ajuan_laundry[0][alatSterilAjuan]';
-            var elementjenisAlat = 'repeater_ajuan_laundry[0][jenisAlatAjuan]';
-            var elementjmlAlat = 'repeater_ajuan_laundry[0][jumlahAlatAjuan]';
+            var elementJenisLinen = 'repeater_ajuan_laundry[0][jenisLinenAjuan]';
+            
+            // var elementAlat = 'repeater_ajuan_laundry[0][alatSterilAjuan]';
+            // var elementjenisAlat = 'repeater_ajuan_laundry[0][jenisAlatAjuan]';
+            // var elementjmlAlat = 'repeater_ajuan_laundry[0][jumlahAlatAjuan]';
 
-             
-            $('#ajuan_steril[name="' + elementAlat + '"]').select2({
+            $('#ajuan_laundry[name="' + elementJenisLinen + '"]').select2({
                 placeholder: "Tuliskan nama alat disini",
                 minimumInputLength: 2,
                 ajax: {
-                    url: '/steril/list-alat',
+                    url: '/laundry/list-linen',
                     dataType: 'json',
                     type: 'POST',
                     headers: header,
                     delay: 500,
-                    data: function (kodealat) {
+                    data: function (kodeLinen) {
                         return {
-                            key: kodealat.term
+                            key: kodeLinen.term
                         };
                     },
                     processResults: function (data) {
                         var datas = [];
                         if (data.result) {
-                            var dataAlat = data.data;
-                            datas = $.map(dataAlat, function (item) {
+                            var dataLinen = data.data;
+                            datas = $.map(dataLinen, function (item) {
                                 return {
-                                    id : item.id_alat,
-                                    text : item.nama_alat,
-                                    nmAlat: item.nama_alat
+                                    id : item.id_linen,
+                                    text : item.nama_linen,
+                                    nmLinen: item.nama_linen
                                 }
 
                             });
@@ -251,48 +253,48 @@ KTUtil.onDOMContentLoaded(function() {
                     cache: true
                 }
             }).on('select2:select', function (e) {
-                var kodeAlatSteril = e.params.data['nmAlat'];
-                $('input[name="' + elementAlat + '"]').val(kodeAlatSteril);
+                var kodeBarangLinen = e.params.data['nmLinen'];
+                $('input[name="' + elementJenisLinen + '"]').val(kodeBarangLinen);
             });
         },
 
         show: function () {
             var index = $(this).closest('[data-repeater-item]').index();
             
-            var elementAlat = 'repeater_ajuan_laundry[' + index + '][alatSterilAjuan]';
+            var elementJenisLinen = 'repeater_ajuan_laundry[' + index + '][jenisLinenAjuan]';
             var elementjenisAlat = 'repeater_ajuan_laundry[' + index + '][jenisAlatAjuan]';
             var elementjmlAlat = 'repeater_ajuan_laundry[' + index + '][jumlahAlatAjuan]';
 
             $(this).slideDown(function () {
                 if (index != 0) {
-                    $('#ajuan_steril[name="' + elementAlat + '"]').select2('open');
+                    $('#ajuan_laundry[name="' + elementJenisLinen + '"]').select2('open');
                 }
             });
 
-            $('#ajuan_steril[name="' + elementAlat + '"]').select2({
+            $('#ajuan_laundry[name="' + elementJenisLinen + '"]').select2({
                 placeholder: "Tuliskan nama alat disini",
                 minimumInputLength: 2,
                 ajax: {
-                    url: '/steril/list-alat',
+                    url: '/laundry/list-linen',
                     dataType: 'json',
                     type: 'POST',
                     headers: header,
                     delay: 500,
-                    data: function (kodealat) {
+                    data: function (kodeLinen) {
                         return {
-                            key: kodealat.term
+                            key: kodeLinen.term
                         };
                     },
                     processResults: function (data) {
                         var datas = [];
                         if (data.result) {
-                            var dataAlat = data.data;
+                            var dataLinen = data.data;
 
-                            datas = $.map(dataAlat, function (item) {
+                            datas = $.map(dataLinen, function (item) {
                                 return {
-                                    id : item.id_alat,
-                                    text : item.nama_alat,
-                                    nmAlat: item.nama_alat
+                                    id : item.id_linen,
+                                    text : item.nama_linen,
+                                    nmLinen: item.nama_linen
                                 }
                             });
                         }
@@ -304,8 +306,8 @@ KTUtil.onDOMContentLoaded(function() {
                     cache: true
                 }
             }).on('select2:select', function (e) {
-                var kodeAlatSteril = e.params.data['nmAlat'];
-                $('input[name="' + elementAlat + '"]').val(kodeAlatSteril);
+                var kodeBarangLinen = e.params.data['nmAlat'];
+                $('input[name="' + elementJenisLinen + '"]').val(kodeBarangLinen);
             });
            
             
@@ -318,60 +320,62 @@ KTUtil.onDOMContentLoaded(function() {
 });
 
 
-$(document).on('click', '#btn_simpan_ajuan_steril', function () {
-    simpanAjuanSteril();
+$(document).on('click', '#btn_simpan_ajuan_laundry', function () {
+    simpanAjuanLaundry();
 });
-function simpanAjuanSteril() {
+function simpanAjuanLaundry() {
    
     var idRuang = $('#idRuang').val();
     var petugas_unit = $('#petugas_unit').val();
     var tanggalPenyerahan = $('#tanggal_penyerahan').val();
-    var cttnUSer = $('#keterangan_user_pengirim').val();
+    var ketUserPengirim = $('#keterangan_user_pengirim').val();
 
     var ttdUnitPengirimPic = null;
     var urlTtdUnitPengirim = signaturePadTtdUnitPengirim.toDataURL();
     ttdUnitPengirimPic = urlTtdUnitPengirim.replace(/^data:image\/[a-z]+;base64,/, "");
 
-    var ajuanalatSterilList = [];
-    var dataTableSterilAjuan = $('#repeater_ajuan_laundry').repeaterVal().repeater_ajuan_laundry;
-    if (dataTableSterilAjuan.length > 0) {
-        for (var i = 0; i < dataTableSterilAjuan.length; i++) {
-            var sterilData = {
-                "idAlatSteril": dataTableSterilAjuan[i].alatSterilAjuan,
-                "jnsAlat": dataTableSterilAjuan[i].jenisAlatAjuan,
-                "jmlAlat": dataTableSterilAjuan[i].jumlahAlatAjuan
+    var ajuanBarangLaundryList = [];
+    var dataTableLaundryAjuan = $('#repeater_ajuan_laundry').repeaterVal().repeater_ajuan_laundry;
+    if (dataTableLaundryAjuan.length > 0) {
+        for (var i = 0; i < dataTableLaundryAjuan.length; i++) {
+            var laundryData = {
+                "idLinen": dataTableLaundryAjuan[i].idLinenAjuan,
+                "jnsLinen": dataTableLaundryAjuan[i].jenisLinenAjuan,
+                "jnsBarang": dataTableLaundryAjuan[i].jenisBarangAjuan,
+                "jmlBarang": dataTableLaundryAjuan[i].jumlahBarangAjuan,
+                "brtBarang": dataTableLaundryAjuan[i].beratBarangAjuan
             };
-            ajuanalatSterilList.push(sterilData);
+            ajuanBarangLaundryList.push(laundryData);
         }     
     }
     
-    // alert(ajuanalatSterilList);
-    var dataAjuanSteril = {
+    // alert(ajuanBarangLaundryList);
+    var dataAjuanLaundry = {
         "idRuang": idRuang,
         "petugas_unit": petugas_unit,
         "tanggalPenyerahan": tanggalPenyerahan,
-        "cttnUSer": cttnUSer,
+        "ketUserPengirim": ketUserPengirim,
         "ttdUnitPengirim": ttdUnitPengirimPic,
-        "alatSteril": ajuanalatSterilList
+        "barangLaundry": ajuanBarangLaundryList
         
     }
-    // console.log(dataSteril);
+    // console.log(dataAjuanLaundry);
     var model = {
-        dataAjuanSteril: dataAjuanSteril
+        dataAjuanLaundry: dataAjuanLaundry
     };
 
     $.ajax({
         type: 'POST',
         headers: header,
-        url: '/homepage/tambah-ajuan-steril',
+        url: '/homepage/tambah-ajuan-laundry',
         data: model,
         success: function(data) {
             if (data.result) {
 
-                toastr.success("Data Steril Berhasil Disimpan");
-                window.location.href = "/homepage/view-ajuan-data-steril";
+                toastr.success("Data Linen Berhasil Disimpan");
+                window.location.href = "/homepage/view-ajuan-data-linen";
             } else {
-                toastr.error("Data Steril Gagal Disimpan");
+                toastr.error("Data Linen Gagal Disimpan");
             }
         },
         error: function(jqXHR, exception) {

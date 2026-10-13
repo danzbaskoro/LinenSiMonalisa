@@ -185,6 +185,9 @@ KTUtil.onDOMContentLoaded(function() {
             alert('Gagal memuat data ruangan.');
         }
     });
+
+
+    
     //pad tandatangan
     let canvasLokalisTtdUnitPengiriman = $("#canvas_pengiriman_alat");
     let widthLokalisTtdUnitPengiriman = "480px";

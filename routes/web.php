@@ -115,3 +115,9 @@ Route::prefix('laporan')->group(function () {
 Route::prefix('grafik')->group(function () {
     Route::get('view-grafik', [GrafikController::class, 'viewGrafik'])->name('grafik');
 });
+
+Route::prefix('laundry')->group(function () {
+    
+    Route::post('list-linen', [LaundryController::class, 'getListLinen']);
+    
+});

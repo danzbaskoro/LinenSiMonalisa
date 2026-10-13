@@ -78,13 +78,13 @@
                             <div class="row">
                                 <div id="signature_pad" class="signature-pad">
                                     <div class="signature-pad-body">
-                                        <canvas id="canvas_pengiriman_alat" class="border border-2"></canvas>
+                                        <canvas id="canvas_pengiriman_linen" class="border border-2"></canvas>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <button type="button" class="btn btn-sm btn-danger clear" id="btn_clear_canvas_pengiriman_alat">
+                                    <button type="button" class="btn btn-sm btn-danger clear" id="btn_clear_canvas_pengiriman_linen">
                                         <i class="fas fa-broom text-white"></i>
                                         CLEAR
                                     </button>
@@ -170,7 +170,7 @@
                     <!--begin::Actions-->
                     <div class="text-center">
                        
-                        <button type="button" id="btn_simpan_ajuan_steril" class="btn btn-primary" >
+                        <button type="button" id="btn_simpan_ajuan_laundry" class="btn btn-primary" >
                             <span class="indicator-label">Submit</span>
                             <span class="indicator-progress">Please wait... 
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
