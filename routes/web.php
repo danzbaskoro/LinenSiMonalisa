@@ -8,6 +8,7 @@ use App\Http\Controllers\SterilController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LaundryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,7 +118,5 @@ Route::prefix('grafik')->group(function () {
 });
 
 Route::prefix('laundry')->group(function () {
-    
     Route::post('list-linen', [LaundryController::class, 'getListLinen']);
-    
 });
