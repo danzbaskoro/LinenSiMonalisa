@@ -188,6 +188,8 @@
 @section('script-js')
 <script src="{{ App\Helpers\VersionJS::Auto('/assets/plugins/custom/formrepeater/formrepeater.bundle.js')}}"></script>
 <script src="{{ App\Helpers\VersionJS::Auto('/assets/js/homepage/ajuan-laundry.js')}}"></script>
-<script src="{{ env('APP_URL') }}/assets/plugins/custom/signature/signature_pad.js"></script>
-<script src="{{ env('APP_URL') }}/assets/plugins/custom/signature/sign_canvas.js"></script>
+<script src="{{ App\Helpers\VersionJS::Auto('/assets/plugins/custom/signature/signature_pad.js')}}"></script>
+<script src="{{ App\Helpers\VersionJS::Auto('/assets/plugins/custom/signature/sign_canvas.js')}}"></script>
+{{-- <script src="{{ env('APP_URL') }}/assets/plugins/custom/signature/signature_pad.js"></script> --}}
+{{-- <script src="{{ env('APP_URL') }}/assets/plugins/custom/signature/sign_canvas.js"></script> --}}
 @endsection
