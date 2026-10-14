@@ -11,7 +11,7 @@ class LaundryDb extends Model
 {
     public function getLinen($key)
     {
-        $q = "SELECT * FROM linen WHERE nama_linen LIKE '%" . $key . "%'";
+        $q = "SELECT * FROM master_linen WHERE nama_linen LIKE '%" . $key . "%'";
         $result = DB::connection('mysqlserver79')->select($q);
         return $result;
     }

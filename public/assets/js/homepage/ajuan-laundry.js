@@ -1,47 +1,52 @@
 var header = {
-    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
 };
 let signaturePadTtdUnitPengirim;
-KTUtil.onDOMContentLoaded(function() {
-    $('#tanggal_penyerahan').datepicker({
+KTUtil.onDOMContentLoaded(function () {
+    $("#tanggal_penyerahan").datepicker({
         autoclose: true,
-        format: 'yyyy-mm-dd',
-        timeFormat: 'HH:mm',
+        format: "yyyy-mm-dd",
+        timeFormat: "HH:mm",
         // endDate: '0',
         // daysOfWeekDisabled: [0, 6],
-        orientation: 'bottom'
-        
+        orientation: "bottom",
     });
-    $('#idRuang').select2().on('change', function() {
-        // Revalidate the field when an option is chosen
-       
-    });
-     // Memuat data ke dropdown
-     $.ajax({
-        type: 'GET', // Metode HTTP
+    $("#idRuang")
+        .select2()
+        .on("change", function () {
+            // Revalidate the field when an option is chosen
+        });
+    // Memuat data ke dropdown
+    $.ajax({
+        type: "GET", // Metode HTTP
         headers: header,
-        url: '/steril/list-ruangan',
-        success: function(data) {
+        url: "/steril/list-ruangan",
+        success: function (data) {
             if (data.result == true) {
                 // console.log(data.data);
                 var option4 = '<option value="">PILIH UNIT</option>';
                 for (var i = 0; i < data.data.length; i++) {
-                    option4 += '<option value="' + data.data[i].id_ruang + '">' + data.data[i].nama_ruang + '</option>';
+                    option4 +=
+                        '<option value="' +
+                        data.data[i].id_ruang +
+                        '">' +
+                        data.data[i].nama_ruang +
+                        "</option>";
                 }
-                $('#idRuang').html(option4);
+                $("#idRuang").html(option4);
             }
         },
-        error: function(xhr, status, error) {
-            console.error('Error saat mengambil data:', error);
-            alert('Gagal memuat data ruangan.');
-        }
+        error: function (xhr, status, error) {
+            console.error("Error saat mengambil data:", error);
+            alert("Gagal memuat data ruangan.");
+        },
     });
-//**belum tau dipake dmn? */
+    //**belum tau dipake dmn? */
     // $('#petugas_cssd').select2().on('change', function() {
     //     // Revalidate the field when an option is chosen
-       
+
     // });
-     // Memuat data ke dropdown
+    // Memuat data ke dropdown
     //  $.ajax({
     //     type: 'GET', // Metode HTTP
     //     headers: header,
@@ -64,7 +69,7 @@ KTUtil.onDOMContentLoaded(function() {
 
     // $('#petugas_pencucian').select2().on('change', function() {
     //     // Revalidate the field when an option is chosen
-       
+
     // });
     //  // Memuat data ke dropdown
     //  $.ajax({
@@ -89,7 +94,7 @@ KTUtil.onDOMContentLoaded(function() {
 
     // $('#petugas_packing').select2().on('change', function() {
     //     // Revalidate the field when an option is chosen
-       
+
     // });
     //  // Memuat data ke dropdown
     //  $.ajax({
@@ -114,7 +119,7 @@ KTUtil.onDOMContentLoaded(function() {
 
     // $('#petugas_operator').select2().on('change', function() {
     //     // Revalidate the field when an option is chosen
-       
+
     // });
     //  // Memuat data ke dropdown
     //  $.ajax({
@@ -139,7 +144,7 @@ KTUtil.onDOMContentLoaded(function() {
 
     // $('#petugas_check').select2().on('change', function() {
     //     // Revalidate the field when an option is chosen
-       
+
     // });
     //  // Memuat data ke dropdown
     //  $.ajax({
@@ -164,7 +169,7 @@ KTUtil.onDOMContentLoaded(function() {
 
     // $('#petugas_cssd_pengembalian').select2().on('change', function() {
     //     // Revalidate the field when an option is chosen
-       
+
     // });
     //  // Memuat data ke dropdown
     //  $.ajax({
@@ -191,195 +196,257 @@ KTUtil.onDOMContentLoaded(function() {
     //pad tandatangan
     let canvasLokalisTtdUnitPengiriman = $("#canvas_pengiriman_linen");
     let widthLokalisTtdUnitPengiriman = "480px";
-    let heightLokalisTtdUnitPengiriman = "360px"
+    let heightLokalisTtdUnitPengiriman = "360px";
     canvasLokalisTtdUnitPengiriman
         .attr("width", widthLokalisTtdUnitPengiriman)
         .attr("height", heightLokalisTtdUnitPengiriman);
-    signaturePadTtdUnitPengirim = new SignaturePad(canvasLokalisTtdUnitPengiriman[0], {
-        backgroundColor: 'rgb(255, 255, 255)',
-        minWidth: 0.5,
-        maxWidth: 1.5
-    });
+    signaturePadTtdUnitPengirim = new SignaturePad(
+        canvasLokalisTtdUnitPengiriman[0],
+        {
+            backgroundColor: "rgb(255, 255, 255)",
+            minWidth: 0.5,
+            maxWidth: 1.5,
+        },
+    );
 
-    $('#btn_clear_canvas_pengiriman_linen').click(function (e) { 
+    $("#btn_clear_canvas_pengiriman_linen").click(function (e) {
         signaturePadTtdUnitPengirim.clear();
-        
     });
     //end
 
-    $('#repeater_ajuan_laundry').repeater({
+    $("#repeater_ajuan_laundry").repeater({
         initEmpty: false,
 
         ready: function () {
-            var elementJenisLinen = 'repeater_ajuan_laundry[0][jenisLinenAjuan]';
-            
-            // var elementAlat = 'repeater_ajuan_laundry[0][alatSterilAjuan]';
-            // var elementjenisAlat = 'repeater_ajuan_laundry[0][jenisAlatAjuan]';
-            // var elementjmlAlat = 'repeater_ajuan_laundry[0][jumlahAlatAjuan]';
-
-            $('#ajuan_laundry[name="' + elementJenisLinen + '"]').select2({
-                placeholder: "Tuliskan nama alat disini",
-                minimumInputLength: 2,
-                ajax: {
-                    url: '/laundry/list-linen',
-                    dataType: 'json',
-                    type: 'POST',
-                    headers: header,
-                    delay: 500,
-                    data: function (kodeLinen) {
-                        return {
-                            key: kodeLinen.term
-                        };
-                    },
-                    processResults: function (data) {
-                        var datas = [];
-                        if (data.result) {
-                            var dataLinen = data.data;
-                            datas = $.map(dataLinen, function (item) {
-                                return {
-                                    id : item.id_linen,
-                                    text : item.nama_linen,
-                                    nmLinen: item.nama_linen
-                                }
-
-                            });
-                            console.log(datas);
-                        }
-
-                        return {
-                            results: datas
-                        };
-                    },
-                    cache: true
-                }
-            }).on('select2:select', function (e) {
-                var kodeBarangLinen = e.params.data['nmLinen'];
-                $('input[name="' + elementJenisLinen + '"]').val(kodeBarangLinen);
-            });
+            // Gunakan find untuk baris pertama
+            var $firstItem = $("[data-repeater-item]").first();
+            initSelect2($firstItem);
         },
 
         show: function () {
-            var index = $(this).closest('[data-repeater-item]').index();
-            
-            var elementJenisLinen = 'repeater_ajuan_laundry[' + index + '][jenisLinenAjuan]';
-            var elementjenisAlat = 'repeater_ajuan_laundry[' + index + '][jenisAlatAjuan]';
-            var elementjmlAlat = 'repeater_ajuan_laundry[' + index + '][jumlahAlatAjuan]';
-
-            $(this).slideDown(function () {
-                if (index != 0) {
-                    $('#ajuan_laundry[name="' + elementJenisLinen + '"]').select2('open');
-                }
-            });
-
-            $('#ajuan_laundry[name="' + elementJenisLinen + '"]').select2({
-                placeholder: "Tuliskan nama alat disini",
-                minimumInputLength: 2,
-                ajax: {
-                    url: '/laundry/list-linen',
-                    dataType: 'json',
-                    type: 'POST',
-                    headers: header,
-                    delay: 500,
-                    data: function (kodeLinen) {
-                        return {
-                            key: kodeLinen.term
-                        };
-                    },
-                    processResults: function (data) {
-                        var datas = [];
-                        if (data.result) {
-                            var dataLinen = data.data;
-
-                            datas = $.map(dataLinen, function (item) {
-                                return {
-                                    id : item.id_linen,
-                                    text : item.nama_linen,
-                                    nmLinen: item.nama_linen
-                                }
-                            });
-                        }
-
-                        return {
-                            results: datas
-                        };
-                    },
-                    cache: true
-                }
-            }).on('select2:select', function (e) {
-                var kodeBarangLinen = e.params.data['nmAlat'];
-                $('input[name="' + elementJenisLinen + '"]').val(kodeBarangLinen);
-            });
-           
-            
+            $(this).slideDown();
+            // Inisialisasi Select2 hanya untuk item yang baru dibuat
+            initSelect2($(this));
         },
 
         hide: function (deleteElement) {
             $(this).slideUp(deleteElement);
-        }
+        },
     });
+
+    // Buat fungsi reusable agar tidak duplikat kode
+    function initSelect2($container) {
+        // Cari elemen dengan class, bukan ID
+        $container.find(".ajuan_laundry").select2({
+            placeholder: "Tuliskan nama alat disini",
+            allowClear: true,
+            minimumInputLength: 2,
+            ajax: {
+                url: "/laundry/list-linen",
+                // ... sisa config ajax tetap sama ...
+                dataType: "json",
+                type: "POST",
+                headers: header,
+                delay: 500,
+                data: function (kodeLinen) {
+                    return {
+                        key: kodeLinen.term,
+                    };
+                },
+                processResults: function (data) {
+                    var datas = [];
+                    if (data.result) {
+                        var dataLinen = data.data;
+                        datas = $.map(dataLinen, function (item) {
+                            return {
+                                id: item.id_linen,
+                                text: item.nama_linen,
+                                nmLinen: item.nama_linen,
+                            };
+                        });
+                        console.log(datas);
+                    }
+
+                    return {
+                        results: datas,
+                    };
+                },
+                cache: true,
+            },
+        })
+            .on("select2:select", function (e) {
+                var kodeBarangLinen = e.params.data;
+                $(this).closest('[data-repeater-item]').find('.input-nama-linen').val(kodeBarangLinen.text);
+                // $('input[name="' + elementJenisLinen + '"]').val(
+                //     kodeBarangLinen,
+                // );
+            });
+    }
 });
 
+// ready: function () {
+//     var elementJenisLinen = 'repeater_ajuan_laundry[0][jenisLinenAjuan]';
 
-$(document).on('click', '#btn_simpan_ajuan_laundry', function () {
+//     $('#ajuan_laundry[name="' + elementJenisLinen + '"]').select2({
+//         placeholder: "Tuliskan nama alat disini",
+//         minimumInputLength: 2,
+//         ajax: {
+//             url: '/laundry/list-linen',
+//             dataType: 'json',
+//             type: 'POST',
+//             headers: header,
+//             delay: 500,
+//             data: function (kodeLinen) {
+//                 return {
+//                     key: kodeLinen.term
+//                 };
+//             },
+//             processResults: function (data) {
+//                 var datas = [];
+//                 if (data.result) {
+//                     var dataLinen = data.data;
+//                     datas = $.map(dataLinen, function (item) {
+//                         return {
+//                             id : item.id_linen,
+//                             text : item.nama_linen,
+//                             nmLinen: item.nama_linen
+//                         }
+
+//                     });
+//                     console.log(datas);
+//                 }
+
+//                 return {
+//                     results: datas
+//                 };
+//             },
+//             cache: true
+//         }
+//     }).on('select2:select', function (e) {
+//         var kodeBarangLinen = e.params.data['nmLinen'];
+//         $('input[name="' + elementJenisLinen + '"]').val(kodeBarangLinen);
+//     });
+// },
+
+// show: function () {
+//     var index = $(this).closest('[data-repeater-item]').index();
+
+//     var elementJenisLinen = 'repeater_ajuan_laundry[' + index + '][jenisLinenAjuan]';
+
+//     $(this).slideDown(function () {
+//         if (index != 0) {
+//             $('#ajuan_laundry[name="' + elementJenisLinen + '"]').select2('open');
+//         }
+//     });
+
+//     $('#ajuan_laundry[name="' + elementJenisLinen + '"]').select2({
+//         placeholder: "Tuliskan nama alat disini",
+//         minimumInputLength: 2,
+//         ajax: {
+//             url: '/laundry/list-linen',
+//             dataType: 'json',
+//             type: 'POST',
+//             headers: header,
+//             delay: 500,
+//             data: function (kodeLinen) {
+//                 return {
+//                     key: kodeLinen.term
+//                 };
+//             },
+//             processResults: function (data) {
+//                 var datas = [];
+//                 if (data.result) {
+//                     var dataLinen = data.data;
+
+//                     datas = $.map(dataLinen, function (item) {
+//                         return {
+//                             id : item.id_linen,
+//                             text : item.nama_linen,
+//                             nmLinen: item.nama_linen
+//                         }
+//                     });
+//                 }
+
+//                 return {
+//                     results: datas
+//                 };
+//             },
+//             cache: true
+//         }
+//     }).on('select2:select', function (e) {
+//         var kodeBarangLinen = e.params.data['nmLinen'];
+//         $('input[name="' + elementJenisLinen + '"]').val(kodeBarangLinen);
+//     });
+// },
+
+// hide: function (deleteElement) {
+//     $(this).slideUp(deleteElement);
+// }
+// });
+// });
+
+$(document).on("click", "#btn_simpan_ajuan_laundry", function () {
     simpanAjuanLaundry();
 });
 function simpanAjuanLaundry() {
-   
-    var idRuang = $('#idRuang').val();
-    var petugas_unit = $('#petugas_unit').val();
-    var tanggalPenyerahan = $('#tanggal_penyerahan').val();
-    var ketUserPengirim = $('#keterangan_user_pengirim').val();
+    var idRuang = $("#idRuang").val();
+    var petugas_unit = $("#petugas_unit").val();
+    var tanggalPenyerahan = $("#tanggal_penyerahan").val();
+    var ketUserPengirim = $("#keterangan_user_pengirim").val();
 
     var ttdUnitPengirimPic = null;
     var urlTtdUnitPengirim = signaturePadTtdUnitPengirim.toDataURL();
-    ttdUnitPengirimPic = urlTtdUnitPengirim.replace(/^data:image\/[a-z]+;base64,/, "");
+    ttdUnitPengirimPic = urlTtdUnitPengirim.replace(
+        /^data:image\/[a-z]+;base64,/,
+        "",
+    );
 
     var ajuanBarangLaundryList = [];
-    var dataTableLaundryAjuan = $('#repeater_ajuan_laundry').repeaterVal().repeater_ajuan_laundry;
+    var dataTableLaundryAjuan = $("#repeater_ajuan_laundry").repeaterVal()
+        .repeater_ajuan_laundry;
     if (dataTableLaundryAjuan.length > 0) {
         for (var i = 0; i < dataTableLaundryAjuan.length; i++) {
             var laundryData = {
-                "idLinen": dataTableLaundryAjuan[i].idLinenAjuan,
-                "jnsLinen": dataTableLaundryAjuan[i].jenisLinenAjuan,
-                "jnsBarang": dataTableLaundryAjuan[i].jenisBarangAjuan,
-                "jmlBarang": dataTableLaundryAjuan[i].jumlahBarangAjuan,
-                "brtBarang": dataTableLaundryAjuan[i].beratBarangAjuan
+                idLinen: dataTableLaundryAjuan[i].idLinenAjuan,
+                jnsLinen: dataTableLaundryAjuan[i].jenisLinenAjuan,
+                jnsBarang: dataTableLaundryAjuan[i].jenisBarangAjuan,
+                jmlBarang: dataTableLaundryAjuan[i].jumlahBarangAjuan,
+                brtBarang: dataTableLaundryAjuan[i].beratBarangAjuan,
             };
             ajuanBarangLaundryList.push(laundryData);
-        }     
+        }
     }
-    
-    // alert(ajuanBarangLaundryList);
+
+    console.log(ajuanBarangLaundryList);
+    return false;
     var dataAjuanLaundry = {
-        "idRuang": idRuang,
-        "petugas_unit": petugas_unit,
-        "tanggalPenyerahan": tanggalPenyerahan,
-        "ketUserPengirim": ketUserPengirim,
-        "ttdUnitPengirim": ttdUnitPengirimPic,
-        "barangLaundry": ajuanBarangLaundryList
-        
-    }
+        idRuang: idRuang,
+        petugas_unit: petugas_unit,
+        tanggalPenyerahan: tanggalPenyerahan,
+        ketUserPengirim: ketUserPengirim,
+        ttdUnitPengirim: ttdUnitPengirimPic,
+        barangLaundry: ajuanBarangLaundryList,
+    };
     // console.log(dataAjuanLaundry);
     var model = {
-        dataAjuanLaundry: dataAjuanLaundry
+        dataAjuanLaundry: dataAjuanLaundry,
     };
 
     $.ajax({
-        type: 'POST',
+        type: "POST",
         headers: header,
-        url: '/homepage/tambah-ajuan-laundry',
+        url: "/homepage/tambah-ajuan-laundry",
         data: model,
-        success: function(data) {
+        success: function (data) {
             if (data.result) {
-
                 toastr.success("Data Linen Berhasil Disimpan");
                 window.location.href = "/homepage/view-ajuan-data-linen";
             } else {
                 toastr.error("Data Linen Gagal Disimpan");
             }
         },
-        error: function(jqXHR, exception) {
-            if (exception === 'parsererror') {
+        error: function (jqXHR, exception) {
+            if (exception === "parsererror") {
                 toastr.error("Tidak bisa dimuat");
                 return false;
             } else if (jqXHR.status == 404) {
@@ -392,6 +459,6 @@ function simpanAjuanLaundry() {
                 toastr.error("Akses Ditolak. Hubungi MDSI");
                 return false;
             }
-        }
+        },
     });
 }

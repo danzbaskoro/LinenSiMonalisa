@@ -4,11 +4,11 @@
 
 
 
-<div id="kt_app_content_container" class="app-container container-fluid">
-    <div class="row gy-5 g-xl-8 pb-7 pt-7">
-        <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
-            <span class="card-label fw-bolder fs-3 text-dark mb-2 text-start">LAUNDRY</span>
-            {{-- <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
+    <div id="kt_app_content_container" class="app-container container-fluid">
+        <div class="row gy-5 g-xl-8 pb-7 pt-7">
+            <div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
+                <span class="card-label fw-bolder fs-3 text-dark mb-2 text-start">LAUNDRY</span>
+                {{-- <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
                 <li class="breadcrumb-item text-muted">
                     <a href="/dashboard/main" class="text-muted text-hover-primary">Home</a>
                 </li>
@@ -21,13 +21,13 @@
                 </li>
                 <li class="breadcrumb-item text-muted">Data Sterill</li>
             </ul> --}}
+            </div>
         </div>
     </div>
-</div>
-<div id="kt_app_content_container" class="app-container container-fluid">
-    <div class="card card-flush">
-        <div class="card-body">
-            <form id="" class="form" action="#">
+    <div id="kt_app_content_container" class="app-container container-fluid">
+        <div class="card card-flush">
+            <div class="card-body">
+                <form id="" class="form" action="#">
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->
@@ -41,14 +41,17 @@
                         <!--begin::Col-->
                         <div class="col-md-4 fv-row">
                             <label class=" fs-6 fw-semibold mb-2">Ruang</label>
-                            <select class="form-select form-select-solid"  id="idRuang" name="idRuang" data-control="select2" data-hide-search="true" data-placeholder="Pilih Ruangan" name="idRuang">
-                               
+                            <select class="form-select form-select-solid" id="idRuang" name="idRuang"
+                                data-control="select2" data-hide-search="true" data-placeholder="Pilih Ruangan"
+                                name="idRuang">
+
                             </select>
                         </div>
                         <!--begin::Col-->
                         <div class="col-md-4 fv-row">
                             <label class="fs-6 fw-semibold mb-2">User Pengirim</label>
-                            <input class="form-control form-control-solid " placeholder="" type="text" id="petugas_unit" name="petugas_unit" />
+                            <input class="form-control form-control-solid " placeholder="" type="text" id="petugas_unit"
+                                name="petugas_unit" />
                         </div>
                         <!--end::Col-->
                         <div class="col-md-4 fv-row">
@@ -59,7 +62,9 @@
                                 <i class="ki-outline ki-calendar-8 fs-2 position-absolute mx-4"></i>
                                 <!--end::Icon-->
                                 <!--begin::Datepicker-->
-                                <input class="form-control form-control-solid ps-12" type="text" placeholder="Select a date" value="<?= date('Y-m-d') ?>" id="tanggal_penyerahan" name="tanggal_penyerahan" />
+                                <input class="form-control form-control-solid ps-12" type="text"
+                                    placeholder="Select a date" value="<?= date('Y-m-d') ?>" id="tanggal_penyerahan"
+                                    name="tanggal_penyerahan" />
                                 <!--end::Datepicker-->
                             </div>
                             <!--end::Input-->
@@ -70,11 +75,12 @@
                         <!--begin::Col-->
                         <div class="col-md-6 fv-row">
                             <label class="fs-6 fw-semibold mb-2">Catatan</label>
-                            <textarea name="keterangan_user_pengirim" id="keterangan_user_pengirim" class="form-control form-control-solid " cols="30" rows="10"></textarea>
+                            <textarea name="keterangan_user_pengirim" id="keterangan_user_pengirim" class="form-control form-control-solid "
+                                cols="30" rows="10"></textarea>
                         </div>
                         <!--end::Col-->
                         <div class="col-md-6 fv-row">
-                        <label class="fs-6 fw-semibold mb-2">Tandatangan User Pengirim</label>
+                            <label class="fs-6 fw-semibold mb-2">Tandatangan User Pengirim</label>
                             <div class="row">
                                 <div id="signature_pad" class="signature-pad">
                                     <div class="signature-pad-body">
@@ -84,7 +90,8 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <button type="button" class="btn btn-sm btn-danger clear" id="btn_clear_canvas_pengiriman_linen">
+                                    <button type="button" class="btn btn-sm btn-danger clear"
+                                        id="btn_clear_canvas_pengiriman_linen">
                                         <i class="fas fa-broom text-white"></i>
                                         CLEAR
                                     </button>
@@ -100,15 +107,19 @@
                             <div data-repeater-item>
                                 <div class="row g-9 mb-8">
                                     <div class="col-md-1 text-center">
-                                        <button class="btn btn-icon-danger btn-active-danger mt-8 p-2" data-repeater-delete type="button">
+                                        <button class="btn btn-icon-danger btn-active-danger mt-8 p-2" data-repeater-delete
+                                            type="button">
                                             <i class="fas fa-trash fs-2"></i>
                                         </button>
                                     </div>
                                     <!--begin::Col-->
                                     <div class="col-md-4 fv-row">
                                         <label class=" fs-6 fw-semibold mb-2">Jenis Linen</label>
-                                        <select class="form-select form-select-solid" id="ajuan_laundry" name="jenisLinenAjuan" >
-                                            
+                                        <select class="form-select form-select-solid ajuan_laundry" name="jenisLinenAjuan">
+                                            <option ></option> <!-- Opsi kosong untuk placeholder -->
+                                        
+                                        {{-- <select class="form-select form-select-solid" id="ajuan_laundry" name="jenisLinenAjuan" > --}}
+
                                         </select>
                                     </div>
                                     <!--end::Col-->
@@ -127,7 +138,8 @@
                                         <!--begin::Input-->
                                         <div class="position-relative d-flex align-items-center">
                                             <!--begin::Datepicker-->
-                                            <input class="form-control form-control-solid " type="text" placeholder="" name="jumlahBarang" id="jumlahBarang"/>
+                                            <input class="form-control form-control-solid " type="text" placeholder=""
+                                                name="jumlahBarang" id="jumlahBarang" />
                                             <!--end::Datepicker-->
                                         </div>
                                         <!--end::Input-->
@@ -138,58 +150,59 @@
                                         <label class=" fs-6 fw-semibold mb-2">Berat (Kg)</label>
                                         <!--begin::Input-->
                                         <div class="position-relative d-flex align-items-center">
-                                            <!--begin::Datepicker-->
-                                            <input class="form-control form-control-solid " type="text" placeholder="" name="jumlahBerat" id="jumlahBerat"/>
-                                            <!--end::Datepicker-->
+
+                                            <input class="form-control form-control-solid " type="text" placeholder=""
+                                                name="jumlahBerat" id="jumlahBerat" />
+
                                         </div>
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
                                 </div>
                                 <!--end::Input group-->
-                                </div>
                             </div>
-                    
-                            <div class="row g-9 mb-8">
-                                <div class="col-md-3 fv-row">
-                                    <label class="fs-6 fw-semibold mb-2">Tambah Barang</label>
-                                    <!--begin::Input-->
-                                    <div class="position-relative d-flex align-items-center">
-                                        
-                                        <!--begin::Datepicker-->
-                                        <button type="button" data-repeater-create class="btn btn-flex btn-primary" >
-                                            <i class="ki-outline ki-plus fs-2"></i>
-                                        </button>
-                                        <!--end::Datepicker-->
-                                    </div>
-                                    <!--end::Input-->
+                        </div>
+
+                        <div class="row g-9 mb-8">
+                            <div class="col-md-3 fv-row">
+                                <label class="fs-6 fw-semibold mb-2">Tambah Barang</label>
+                                <!--begin::Input-->
+                                <div class="position-relative d-flex align-items-center">
+
+                                    <!--begin::Datepicker-->
+                                    <button type="button" data-repeater-create class="btn btn-flex btn-primary">
+                                        <i class="ki-outline ki-plus fs-2"></i>
+                                    </button>
+                                    <!--end::Datepicker-->
                                 </div>
+                                <!--end::Input-->
                             </div>
+                        </div>
                     </div>
                     <div class="separator d-flex flex-center mb-8"></div>
                     <!--begin::Actions-->
                     <div class="text-center">
-                       
-                        <button type="button" id="btn_simpan_ajuan_laundry" class="btn btn-primary" >
+
+                        <button type="button" id="btn_simpan_ajuan_laundry" class="btn btn-primary">
                             <span class="indicator-label">Submit</span>
-                            <span class="indicator-progress">Please wait... 
-                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            <span class="indicator-progress">Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                         </button>
                     </div>
                     <!--end::Actions-->
                 </form>
+            </div>
         </div>
     </div>
-</div>
 
 
 @endsection
 
 @section('script-js')
-<script src="{{ App\Helpers\VersionJS::Auto('/assets/plugins/custom/formrepeater/formrepeater.bundle.js')}}"></script>
-<script src="{{ App\Helpers\VersionJS::Auto('/assets/js/homepage/ajuan-laundry.js')}}"></script>
-<script src="{{ App\Helpers\VersionJS::Auto('/assets/plugins/custom/signature/signature_pad.js')}}"></script>
-<script src="{{ App\Helpers\VersionJS::Auto('/assets/plugins/custom/signature/sign_canvas.js')}}"></script>
-{{-- <script src="{{ env('APP_URL') }}/assets/plugins/custom/signature/signature_pad.js"></script> --}}
-{{-- <script src="{{ env('APP_URL') }}/assets/plugins/custom/signature/sign_canvas.js"></script> --}}
+    <script src="{{ App\Helpers\VersionJS::Auto('/assets/plugins/custom/formrepeater/formrepeater.bundle.js') }}"></script>
+    <script src="{{ App\Helpers\VersionJS::Auto('/assets/js/homepage/ajuan-laundry.js') }}"></script>
+    <script src="{{ App\Helpers\VersionJS::Auto('/assets/plugins/custom/signature/signature_pad.js') }}"></script>
+    <script src="{{ App\Helpers\VersionJS::Auto('/assets/plugins/custom/signature/sign_canvas.js') }}"></script>
+    {{-- <script src="{{ env('APP_URL') }}/assets/plugins/custom/signature/signature_pad.js"></script> --}}
+    {{-- <script src="{{ env('APP_URL') }}/assets/plugins/custom/signature/sign_canvas.js"></script> --}}
 @endsection
