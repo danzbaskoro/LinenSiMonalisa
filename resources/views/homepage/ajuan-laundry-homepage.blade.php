@@ -102,8 +102,8 @@
                     <!--end::Input group-->
                     <div class="separator d-flex flex-center mb-8"></div>
                     <!--begin::Input group-->
-                    <div id="repeater_ajuan_laundry">
-                        <div data-repeater-list="repeater_ajuan_laundry">
+                    <div id="repeat_ajuan_laundry">
+                        <div data-repeater-list="repeat_ajuan_laundry">
                             <div data-repeater-item>
                                 <div class="row g-9 mb-8">
                                     <div class="col-md-1 text-center">
@@ -115,20 +115,23 @@
                                     <!--begin::Col-->
                                     <div class="col-md-4 fv-row">
                                         <label class=" fs-6 fw-semibold mb-2">Jenis Linen</label>
-                                        <select class="form-select form-select-solid ajuan_laundry" name="jenisLinenAjuan">
-                                            <option ></option> <!-- Opsi kosong untuk placeholder -->
+                                        {{-- <select class="form-select form-select-solid ajuan_laundry" name="jenisLinenAjuan">
+                                            <option ></option> <!-- Opsi kosong untuk placeholder --> --}}
                                         
-                                        {{-- <select class="form-select form-select-solid" id="ajuan_laundry" name="jenisLinenAjuan" > --}}
+                                        <!-- Hapus id="ajuan_laundry" -->
+                                    <select class="form-select form-select-solid jenis-linen-select" name="jenisLinenAjuan">
+                                        <option ></option>
+                                    </select>
 
-                                        </select>
+                                        {{-- </select> --}}
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                     <div class="col-md-3 fv-row">
                                         <label class=" fs-6 fw-semibold mb-2">Jenis Barang</label>
-                                        <select class="form-select form-select-solid" id="jenisBarang" name="jenisBarang">
-                                            <option value="barangMasuk" selected>Barang Masuk (Kotor)</option>
-                                            <option value="barangKeluar">Barang Keluar (Bersih)</option>
+                                        <select class="form-select form-select-solid" id="jenisBarang" name="jenisBarangAjuan">
+                                            <option value="Barang Masuk (Kotor)">Barang Masuk (Kotor)</option>
+                                            <option value="Barang Keluar (Bersih)">Barang Keluar (Bersih)</option>
                                         </select>
                                     </div>
                                     <!--end::Col-->
@@ -139,7 +142,7 @@
                                         <div class="position-relative d-flex align-items-center">
                                             <!--begin::Datepicker-->
                                             <input class="form-control form-control-solid " type="text" placeholder=""
-                                                name="jumlahBarang" id="jumlahBarang" />
+                                                name="jumlahBarangAjuan" id="jumlahBarang" />
                                             <!--end::Datepicker-->
                                         </div>
                                         <!--end::Input-->
@@ -152,7 +155,7 @@
                                         <div class="position-relative d-flex align-items-center">
 
                                             <input class="form-control form-control-solid " type="text" placeholder=""
-                                                name="jumlahBerat" id="jumlahBerat" />
+                                                name="beratBarangAjuan" id="jumlahBerat" />
 
                                         </div>
                                         <!--end::Input-->
