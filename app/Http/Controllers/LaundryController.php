@@ -45,4 +45,53 @@ class LaundryController extends Controller
         return $this->resultWithData($resultLinen, true, 200);
     }
 
+    public function simpanAjuanLaundry(Request $request)
+    {
+        $dataAjuanSteril = $request->dataAjuanSteril;
+        
+    //    dd($dataPengambilanSteril);
+
+        $idRuang = $request->dataAjuanSteril['idRuang'];
+       
+        $petugas_unit = $request->dataAjuanSteril['petugas_unit'];
+        $tanggalPenyerahan = $request->dataAjuanSteril['tanggalPenyerahan'];
+        $cttnUSer = $request->dataAjuanSteril['cttnUSer'];
+        $ttdUnitPengirim = $request->dataAjuanSteril['ttdUnitPengirim'];
+       
+        $alatSteril = $request->dataAjuanSteril['alatSteril'];
+        $checkKode = $this->homepageDB->cekKodeCssd($tanggalPenyerahan);
+        $lastKode = (int) substr($checkKode[0]->kode_steril, 5);
+        
+
+        if (!empty($checkKode[0]->kode_steril)) {
+            $nokodeSteril = $lastKode + 1;
+            $kodeSteril = sprintf("CSSD-%04d", $nokodeSteril);
+
+        }else{
+            $kodeSteril = sprintf("CSSD-%04d", 1);
+        }
+        foreach ($alatSteril as $listAlat) {
+            $arrayDataAjuanSteril = array(
+                    "kode_steril" => $kodeSteril,
+                    "id_ruang" => $idRuang,
+                    "id_alat" => $listAlat['idAlatSteril'],
+                    "jns_alat" => $listAlat['jnsAlat'],
+                    "jml_alat" => $listAlat['jmlAlat'],
+                    "tgl_penyerahan_alat" => $tanggalPenyerahan." ".date('H:i:s'),
+                    "p_unit_penerimaan" => $petugas_unit,
+                    "ttd_unit_pengirim" => $ttdUnitPengirim,
+                    "keterangan_user" => $cttnUSer,
+                    "status_pengambilan" => 'Belum diambil'
+            );
+            $arrayDataAjuanSteril = $this->homepageDB->insert('steril', $arrayDataAjuanSteril);
+        }
+        // dd($arrayDataPengambilanSteril);
+        
+        if (!$arrayDataAjuanSteril) {
+            return $this->resultWithData("Gagal Update Data Steril", false, 200);
+        } else {
+            return $this->resultWithData($arrayDataAjuanSteril, true, 200);
+        }
+    }
+
 }

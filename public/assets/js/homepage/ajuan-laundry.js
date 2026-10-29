@@ -275,11 +275,11 @@ KTUtil.onDOMContentLoaded(function () {
             },
         })
             .on("select2:select", function (e) {
-                var kodeBarangLinen = e.params.data;
-                $(this).closest('[data-repeater-item]').find('.jenis-linen-select').val(kodeBarangLinen.text);
-                // $('input[name="' + elementJenisLinen + '"]').val(
-                //     kodeBarangLinen,
-                // );
+                var kodeBarangLinen = e.params.data["nmLinen"];
+                // $(this).closest('[data-repeater-item]').find('.jenis-linen-select').val(kodeBarangLinen);
+                var index = $(this).closest('[data-repeater-item]').index();
+                var jenisLinenAjuan = 'repeat_ajuan_laundry[' + index + '][jenisLinenAjuan]';
+                $('input[name="' + jenisLinenAjuan + '"]').val(kodeBarangLinen);
             });
     }
 
@@ -384,84 +384,6 @@ KTUtil.onDOMContentLoaded(function () {
 // }
 // });
 
-// $("#repeat_ajuan_laundry").repeater({
-//     initEmpty: false,
-
-//     ready: function () {
-//         // Cari elemen select pada baris yang sudah ada saat halaman pertama kali dimuat
-//         $('[data-repeater-item]').find('.jenis-linen-select').select2({
-//             placeholder: "Tuliskan nama linen disini",
-//             minimumInputLength: 2,
-//             ajax: {
-//                 url: '/laundry/list-linen',
-//                 dataType: 'json',
-//                 type: 'POST',
-//                 headers: header,
-//                 delay: 500,
-//                 data: function (kodeLinen) {
-//                     return { key: kodeLinen.term };
-//                 },
-//                 processResults: function (data) {
-//                     var datas = [];
-//                     if (data.result) {
-//                         datas = $.map(data.data, function (item) {
-//                             return {
-//                                 // PENTING: Select2 wajib memiliki 'id', pastikan item.id_linen tidak bernilai null dari database
-//                                 id: item.id, 
-//                                 text: item.nama_linen 
-//                             }
-//                         });
-//                     }
-//                     return { results: datas };
-//                 },
-//                 cache: true
-//             }
-//         });
-//     },
-
-//     show: function () {
-//         // $(this) merujuk pada elemen baris (row) baru yang sedang dibuat oleh repeater
-//         var $newRow = $(this); 
-
-//         $newRow.slideDown(function () {
-//             // Gunakan find() untuk HANYA menginisiasi select2 pada baris baru tersebut
-//             $newRow.find('.jenis-linen-select').select2({
-//                 placeholder: "Tuliskan nama linen disini",
-//                 minimumInputLength: 2,
-//                 ajax: {
-//                     url: '/laundry/list-linen',
-//                     dataType: 'json',
-//                     type: 'POST',
-//                     headers: header,
-//                     delay: 500,
-//                     data: function (kodeLinen) {
-//                         return { key: kodeLinen.term };
-//                     },
-//                     processResults: function (data) {
-//                         var datas = [];
-//                         if (data.result) {
-//                             datas = $.map(data.data, function (item) {
-//                                 return {
-//                                     id: item.id,
-//                                     text: item.nama_linen
-//                                 }
-//                             });
-//                         }
-//                         return { results: datas };
-//                     }
-//                 }
-//             });
-
-//             // Buka dropdown secara otomatis
-//             $newRow.find('.jenis-linen-select').select2('open');
-//         });
-//     },
-
-//     hide: function (deleteElement) {
-//         $(this).slideUp(deleteElement);
-//     }
-// });
-
 });
 
 $(document).on("click", "#btn_simpan_ajuan_laundry", function () {
@@ -484,13 +406,12 @@ function simpanAjuanLaundry() {
     var dataTableLaundryAjuan = $("#repeat_ajuan_laundry").repeaterVal().repeat_ajuan_laundry;
     if (dataTableLaundryAjuan.length > 0) {
         // Ambil elemen baris fisik dari repeater untuk kebutuhan mengambil teks label Select2
-    var $repeaterItems = $("[data-repeater-item]");
+    // var $repeaterItems = $("[data-repeater-item]");
         for (var i = 0; i < dataTableLaundryAjuan.length; i++) {
-            // Ambil teks label dari dropdown Select2
-        var namaLinenTerpilih = $repeaterItems.eq(i).find('.jenis-linen-select option:selected').text();
+            
             var laundryData = {
                 "idLinen": dataTableLaundryAjuan[i].jenisLinenAjuan,
-                "jnsLinen": namaLinenTerpilih,
+                // "jnsLinen": dataTableLaundryAjuan[i].jenisLinenAjuan,
                 "jnsBarang": dataTableLaundryAjuan[i].jenisBarangAjuan,
                 "jmlBarang": dataTableLaundryAjuan[i].jumlahBarangAjuan,
                 "brtBarang": dataTableLaundryAjuan[i].beratBarangAjuan
@@ -500,7 +421,7 @@ function simpanAjuanLaundry() {
     }
 
     console.log(ajuanBarangLaundryList);
-    return false;
+    // return false;
     var dataAjuanLaundry = {
         idRuang: idRuang,
         petugas_unit: petugas_unit,
@@ -510,7 +431,7 @@ function simpanAjuanLaundry() {
         barangLaundry: ajuanBarangLaundryList,
     };
     console.log(dataAjuanLaundry);
-    
+    // return false;
     var model = {
         dataAjuanLaundry: dataAjuanLaundry,
     };

@@ -119,4 +119,5 @@ Route::prefix('grafik')->group(function () {
 
 Route::prefix('laundry')->group(function () {
     Route::post('list-linen', [LaundryController::class, 'getListLinen']);
+    Route::post('tambah-ajuan-laundry', [LaundryController::class, 'simpanAjuanLaundry']);
 });

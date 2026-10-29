@@ -15,4 +15,16 @@ class LaundryDb extends Model
         $result = DB::connection('mysqlserver79')->select($q);
         return $result;
     }
+
+    public function insert($namaTabel, $data)
+    {
+        try {
+            $result = DB::connection('mysqlserver79')->table($namaTabel)
+                ->insert($data);
+            return $result;
+        } catch (Exception $e) {
+            // print_r($e->getMessage());
+            return false;
+        }
+    }
 }
