@@ -46,51 +46,49 @@ class LaundryController extends Controller
     }
 
     public function simpanAjuanLaundry(Request $request)
-    {
-        $dataAjuanSteril = $request->dataAjuanSteril;
-        
-    //    dd($dataPengambilanSteril);
-
-        $idRuang = $request->dataAjuanSteril['idRuang'];
+    {   
+        $idRuang = $request->dataAjuanLaundry['idRuang'];
        
-        $petugas_unit = $request->dataAjuanSteril['petugas_unit'];
-        $tanggalPenyerahan = $request->dataAjuanSteril['tanggalPenyerahan'];
-        $cttnUSer = $request->dataAjuanSteril['cttnUSer'];
-        $ttdUnitPengirim = $request->dataAjuanSteril['ttdUnitPengirim'];
+        $petugas_unit = $request->dataAjuanLaundry['petugasUnit'];
+        $tanggalPenyerahan = $request->dataAjuanLaundry['tanggalPenyerahan'];
+        $ketUserPengirim = $request->dataAjuanLaundry['ketUserPengirim'];
+        $ttdUnitPengirim = $request->dataAjuanLaundry['ttdUnitPengirim'];
        
-        $alatSteril = $request->dataAjuanSteril['alatSteril'];
-        $checkKode = $this->homepageDB->cekKodeCssd($tanggalPenyerahan);
-        $lastKode = (int) substr($checkKode[0]->kode_steril, 5);
+        $alatLinen = $request->dataAjuanLaundry['barangLaundry'];
+        $checkKode = $this->laundryDb->cekKodeLaundry($tanggalPenyerahan);
+        $lastKode = (int) substr($checkKode[0]->kode_linen, 5);
         
 
-        if (!empty($checkKode[0]->kode_steril)) {
-            $nokodeSteril = $lastKode + 1;
-            $kodeSteril = sprintf("CSSD-%04d", $nokodeSteril);
+        if (!empty($checkKode[0]->kode_linen)) {
+            $nokodeLinen = $lastKode + 1;
+            $kodeLinen = sprintf("LINEN-%04d", $nokodeLinen);
 
         }else{
-            $kodeSteril = sprintf("CSSD-%04d", 1);
+            $kodeLinen = sprintf("LINEN-%04d", 1);
         }
-        foreach ($alatSteril as $listAlat) {
-            $arrayDataAjuanSteril = array(
-                    "kode_steril" => $kodeSteril,
-                    "id_ruang" => $idRuang,
-                    "id_alat" => $listAlat['idAlatSteril'],
-                    "jns_alat" => $listAlat['jnsAlat'],
-                    "jml_alat" => $listAlat['jmlAlat'],
-                    "tgl_penyerahan_alat" => $tanggalPenyerahan." ".date('H:i:s'),
+        foreach ($alatLinen as $listAlat) {
+            $arrayDataAjuanLinen = array(
+                    "kode_linen" => $kodeLinen,
+                    "id_ruangan" => $idRuang,
+                    "id_linen" => $listAlat['idLinen'],
+                    "jumlah_masuk" => $listAlat['jmlBarang'],
+                    "berat_kg" => $listAlat['brtBarang'],
+                    "tgl_penyerahan_linen" => $tanggalPenyerahan." ".date('H:i:s'),
                     "p_unit_penerimaan" => $petugas_unit,
                     "ttd_unit_pengirim" => $ttdUnitPengirim,
-                    "keterangan_user" => $cttnUSer,
+                    "keterangan_user" => $ketUserPengirim,
                     "status_pengambilan" => 'Belum diambil'
             );
-            $arrayDataAjuanSteril = $this->homepageDB->insert('steril', $arrayDataAjuanSteril);
+            dd($arrayDataAjuanLinen);
+
+            $arrayDataAjuanL = $this->laundryDb->insert('transaksi_linen', $arrayDataAjuanLinen);
         }
         // dd($arrayDataPengambilanSteril);
         
-        if (!$arrayDataAjuanSteril) {
-            return $this->resultWithData("Gagal Update Data Steril", false, 200);
+        if (!$arrayDataAjuanL) {
+            return $this->resultWithData("Gagal Update Data Linen", false, 200);
         } else {
-            return $this->resultWithData($arrayDataAjuanSteril, true, 200);
+            return $this->resultWithData($arrayDataAjuanLinen, true, 200);
         }
     }
 

@@ -1,7 +1,7 @@
 var header = {
     "X-CSRF-Token": $('meta[name="csrf-token"]').attr("content"),
 };
-let signaturePadTtdUnitPengirim;
+let signaturePadTtdUnitPengirimLaundry;
 KTUtil.onDOMContentLoaded(function () {
     $("#tanggal_penyerahan").datepicker({
         autoclose: true,
@@ -200,7 +200,7 @@ KTUtil.onDOMContentLoaded(function () {
     canvasLokalisTtdUnitPengiriman
         .attr("width", widthLokalisTtdUnitPengiriman)
         .attr("height", heightLokalisTtdUnitPengiriman);
-    signaturePadTtdUnitPengirim = new SignaturePad(
+    signaturePadTtdUnitPengirimLaundry = new SignaturePad(
         canvasLokalisTtdUnitPengiriman[0],
         {
             backgroundColor: "rgb(255, 255, 255)",
@@ -210,7 +210,7 @@ KTUtil.onDOMContentLoaded(function () {
     );
 
     $("#btn_clear_canvas_pengiriman_linen").click(function (e) {
-        signaturePadTtdUnitPengirim.clear();
+        signaturePadTtdUnitPengirimLaundry.clear();
     });
     //end
 
@@ -396,7 +396,7 @@ function simpanAjuanLaundry() {
     var ketUserPengirim = $("#keterangan_user_pengirim").val();
 
     var ttdUnitPengirimPic = null;
-    var urlTtdUnitPengirim = signaturePadTtdUnitPengirim.toDataURL();
+    var urlTtdUnitPengirim = signaturePadTtdUnitPengirimLaundry.toDataURL();
     ttdUnitPengirimPic = urlTtdUnitPengirim.replace(
         /^data:image\/[a-z]+;base64,/,
         "",
@@ -412,7 +412,7 @@ function simpanAjuanLaundry() {
             var laundryData = {
                 "idLinen": dataTableLaundryAjuan[i].jenisLinenAjuan,
                 // "jnsLinen": dataTableLaundryAjuan[i].jenisLinenAjuan,
-                "jnsBarang": dataTableLaundryAjuan[i].jenisBarangAjuan,
+                // "jnsBarang": dataTableLaundryAjuan[i].jenisBarangAjuan,
                 "jmlBarang": dataTableLaundryAjuan[i].jumlahBarangAjuan,
                 "brtBarang": dataTableLaundryAjuan[i].beratBarangAjuan
             };
@@ -423,12 +423,12 @@ function simpanAjuanLaundry() {
     console.log(ajuanBarangLaundryList);
     // return false;
     var dataAjuanLaundry = {
-        idRuang: idRuang,
-        petugas_unit: petugas_unit,
-        tanggalPenyerahan: tanggalPenyerahan,
-        ketUserPengirim: ketUserPengirim,
-        ttdUnitPengirim: ttdUnitPengirimPic,
-        barangLaundry: ajuanBarangLaundryList,
+        "idRuang": idRuang,
+        "petugasUnit": petugas_unit,
+        "tanggalPenyerahan": tanggalPenyerahan,
+        "ketUserPengirim": ketUserPengirim,
+        "ttdUnitPengirim": ttdUnitPengirimPic,
+        "barangLaundry": ajuanBarangLaundryList,
     };
     console.log(dataAjuanLaundry);
     // return false;
@@ -439,7 +439,7 @@ function simpanAjuanLaundry() {
     $.ajax({
         type: "POST",
         headers: header,
-        url: "/homepage/tambah-ajuan-laundry",
+        url: "/laundry/tambah-ajuan-laundry",
         data: model,
         success: function (data) {
             if (data.result) {

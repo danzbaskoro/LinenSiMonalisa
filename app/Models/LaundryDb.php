@@ -27,4 +27,13 @@ class LaundryDb extends Model
             return false;
         }
     }
+
+    public function cekKodeLaundry($tahun)
+    {
+        $q = sprintf("SELECT * FROM transaksi_linen WHERE YEAR(tgl_penyerahan_linen) = '%s'
+        ORDER BY kode_linen DESC LIMIT 1 ", $tahun);
+        $result = DB::connection('mysqlserver79')->select($q);
+        return $result;
+    }
+
 }

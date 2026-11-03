@@ -127,13 +127,13 @@
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
-                                    <div class="col-md-3 fv-row">
+                                    {{-- <div class="col-md-3 fv-row">
                                         <label class=" fs-6 fw-semibold mb-2">Jenis Barang</label>
                                         <select class="form-select form-select-solid" id="jenisBarang" name="jenisBarangAjuan">
                                             <option value="Barang Masuk (Kotor)">Barang Masuk (Kotor)</option>
                                             <option value="Barang Keluar (Bersih)">Barang Keluar (Bersih)</option>
                                         </select>
-                                    </div>
+                                    </div> --}}
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                     <div class="col-md-2 fv-row">
