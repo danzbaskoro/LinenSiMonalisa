@@ -68,6 +68,12 @@ Route::group(['prefix' => 'master-data', 'middleware' => ['auth']], function () 
     Route::post('edit-list-alat', [MasterController::class, 'editDataAlat']);
     Route::get('/hapus/{idAlat}', [MasterController::class, 'hapusDataAlat']);
 
+    Route::get('linen', [MasterController::class, 'viewDataLinen'])->name('data-linen');
+    Route::get('list-linen', [MasterController::class, 'getDataLinen']);
+    Route::post('simpan-list-linen', [MasterController::class, 'addDataLinen']);
+    Route::post('edit-list-linen', [MasterController::class, 'editDatalinen']);
+    Route::get('/hapus/{idlinen}', [MasterController::class, 'hapusDatalinen']);
+
     Route::get('ruang', [MasterController::class, 'viewDataRuang'])->name('data-ruang');
     Route::get('list-ruang', [MasterController::class, 'getDataRuang']);
     Route::post('simpan-list-ruang', [MasterController::class, 'addDataRuang']);
@@ -120,4 +126,6 @@ Route::prefix('grafik')->group(function () {
 Route::prefix('laundry')->group(function () {
     Route::post('list-linen', [LaundryController::class, 'getListLinen']);
     Route::post('tambah-ajuan-laundry', [LaundryController::class, 'simpanAjuanLaundry']);
+    Route::get('view-steril', [LaundryController::class, 'viewLaundry'])->middleware('auth')->name('data-laundry');
+    Route::get('view-laporan', [LaundryController::class, 'viewLaporan'])->middleware('auth')->name('laporan-laundry');
 });

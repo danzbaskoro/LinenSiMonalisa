@@ -56,16 +56,17 @@ class LaundryController extends Controller
        
         $alatLinen = $request->dataAjuanLaundry['barangLaundry'];
         $checkKode = $this->laundryDb->cekKodeLaundry($tanggalPenyerahan);
-        $lastKode = (int) substr($checkKode[0]->kode_linen, 5);
+        $lastKode = (int) substr($checkKode, 6);
+        // $lastKode = (int) substr($checkKode[0]->kode_linen, 5);
         
-
-        if (!empty($checkKode[0]->kode_linen)) {
+        if ($checkKode != null) {
             $nokodeLinen = $lastKode + 1;
             $kodeLinen = sprintf("LINEN-%04d", $nokodeLinen);
 
         }else{
             $kodeLinen = sprintf("LINEN-%04d", 1);
         }
+    //    dd($kodeLinen);
         foreach ($alatLinen as $listAlat) {
             $arrayDataAjuanLinen = array(
                     "kode_linen" => $kodeLinen,
@@ -79,7 +80,6 @@ class LaundryController extends Controller
                     "keterangan_user" => $ketUserPengirim,
                     "status_pengambilan" => 'Belum diambil'
             );
-            dd($arrayDataAjuanLinen);
 
             $arrayDataAjuanL = $this->laundryDb->insert('transaksi_linen', $arrayDataAjuanLinen);
         }

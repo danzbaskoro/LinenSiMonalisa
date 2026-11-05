@@ -33,7 +33,14 @@ class LaundryDb extends Model
         $q = sprintf("SELECT * FROM transaksi_linen WHERE YEAR(tgl_penyerahan_linen) = '%s'
         ORDER BY kode_linen DESC LIMIT 1 ", $tahun);
         $result = DB::connection('mysqlserver79')->select($q);
-        return $result;
+
+        if (empty($result)) {
+            $kode = null;
+        } else {
+            $kode = $result[0]->kode_linen;
+        }
+
+        return $kode;
     }
 
 }
