@@ -71,8 +71,8 @@ Route::group(['prefix' => 'master-data', 'middleware' => ['auth']], function () 
     Route::get('linen', [MasterController::class, 'viewDataLinen'])->name('data-linen');
     Route::get('list-linen', [MasterController::class, 'getDataLinen']);
     Route::post('simpan-list-linen', [MasterController::class, 'addDataLinen']);
-    Route::post('edit-list-linen', [MasterController::class, 'editDatalinen']);
-    Route::get('/hapus/{idlinen}', [MasterController::class, 'hapusDatalinen']);
+    Route::post('edit-list-linen', [MasterController::class, 'editDataLinen']);
+    Route::get('/hapus-linen/{idLinen}', [MasterController::class, 'hapusDataLinen']);
 
     Route::get('ruang', [MasterController::class, 'viewDataRuang'])->name('data-ruang');
     Route::get('list-ruang', [MasterController::class, 'getDataRuang']);

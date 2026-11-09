@@ -341,4 +341,9 @@ class MasterController extends Controller
             return $this->resultWithData($updatePassUser, true, 200);
         }
     }
+
+    public function viewDataLinen()
+    {
+        return view('master-data.linen');
+    }
 }
