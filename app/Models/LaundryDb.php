@@ -43,4 +43,42 @@ class LaundryDb extends Model
         return $kode;
     }
 
+    public function getDataLinen($filters, int $start, int $length, string $sortField, string $sortOrder)
+    {
+        $q = sprintf("SELECT a.id, a.nama_linen
+                            FROM master_linen a "
+                    );
+
+        if (!empty($filters)) {
+            $q .= sprintf(" where (a.nama_linen like '%%%s%%' )", $filters);
+        }
+
+        $q .= sprintf(" where a.is_active = 1 order by %s %s limit %s offset %s", $sortField, $sortOrder, $length, $start);
+        $result = DB::connection('mysqlserver79')->select($q);
+        return $result;
+    }
+    public function getTotalDataLinen($filters)
+    {
+        $q = sprintf("select COUNT(a.id) AS jumlah from master_linen a ");
+
+        if (!empty($filters)) {
+            $q .= sprintf(" where (a.nama_linen like '%%%s%%' )", $filters);
+        }
+
+        $result = DB::connection('mysqlserver79')->select($q)[0]->jumlah;
+        return $result;
+    }
+
+    public function edit($namaTabel, $data, $id)
+    {
+        try {
+            $result = DB::connection('mysqlserver79')->table($namaTabel)
+                ->where('id', $id)
+                ->update($data);
+            return $result;
+        } catch (Exception $e) {
+            // print_r($e->getMessage());
+            return false;
+        }
+    }
 }

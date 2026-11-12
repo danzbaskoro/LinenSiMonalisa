@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\AlatDb;
+use App\Models\LaundryDb;
 use App\Traits\JsonResult;
 use Illuminate\Support\Facades\Session;
 use App\Enums\ConstSessions;
@@ -18,10 +19,12 @@ class MasterController extends Controller
 {
     use JsonResult;
     private $alatDB;
+    private $laundryDb;
 
     public function __construct()
     {
         $this->alatDB = new AlatDb();
+        $this->laundryDb = new LaundryDb();
     }
     public function viewDataAlat()
     {
@@ -69,6 +72,7 @@ class MasterController extends Controller
         $result = array('draw' => $draw, 'recordsTotal' => $total, 'recordsFiltered' => $total, 'data' => $ls);
         return response()->json($result);
     }
+
     public function addDataAlat(Request $request)
     {
         $dataAlat = $request->dataAlat;
@@ -345,5 +349,87 @@ class MasterController extends Controller
     public function viewDataLinen()
     {
         return view('master-data.linen');
+    }
+
+    public function getDataLinen(Request $request)
+    {
+        $result = array();
+        $ls = array();
+        $draw = $request->draw;
+        $filters = $request->search['value'];
+        $start = $request->start ?? 0;
+        $length = $request->length ?? 10;
+        $kolom = 'created_at';
+        $order = 'desc';
+        if ($request->order ?? false) {
+            $kolom = $request->order[0]['column'];
+            $order = $request->order[0]['dir'];
+        }
+
+        $result = $this->laundryDb->getDataLinen($filters, $start, $length, $kolom, $order);
+        $total = $this->laundryDb->getTotalDataLinen($filters);
+
+        if ($total > 0) {
+            $a = array();
+            $i = $request->start + 1;
+            foreach ($result as $item) {
+                $data_name = $item->nama_linen;
+                $aksi = '<div class="w-100 text-center"><button type="button" class="btn btn-sm btn-flex btn-warning text-center" id="' . $item->id . '" name="' . $data_name . '" onclick=EditDataLinen(this.id,this.name)><i class="ki-outline ki-notepad-edit fs-3 ms-1"></i></button><button type="button" class="btn btn-sm btn-flex btn-danger ms-3 text-center" id="' . $item->id . '" name="' . $item->id . '" onclick=HapusDataLinen(this.id)><i class="ki-outline ki-cross-square fs-3 ms-1"></i></button></div>';
+
+                if (!empty($item->created_at)) {
+                    $item->created_at = date('d-m-Y H:i:s', strtotime($item->created_at));
+                }
+
+                if (!empty($item->updated_at)) {
+                    $item->updated_at = date('d-m-Y H:i:s', strtotime($item->updated_at));
+                }
+
+                $a = array($i, $item->nama_linen, $aksi);
+                array_push($ls, $a);
+                $i++;
+            }
+        }
+
+        $result = array('draw' => $draw, 'recordsTotal' => $total, 'recordsFiltered' => $total, 'data' => $ls);
+        return response()->json($result);
+    }
+
+    public function addDataLinen(Request $request)
+    {
+        $dataAlat = $request->dataAlat;
+        $namaAlat = $request->dataAlat['namaAlat'];
+        // $satuanAlat = $request->dataAlat['satuanAlat'];
+
+        $arrayDataAlat = array(
+            "nama_alat" => $namaAlat
+            // "satuan_alat" => $satuanAlat
+        );
+        
+        $insertDataAlat = $this->laundryDb->insert('master_linen', $arrayDataAlat);
+        if (!$insertDataAlat) {
+            return $this->resultWithData("Gagal Simpan Data Linen", false, 200);
+        } else {
+            return $this->resultWithData($insertDataAlat, true, 200);
+        }
+    }
+
+    public function editDataLinen(Request $request)
+    {
+        // $dataLinen = $request->dataLinen;
+        $idLinen = $request->dataLinen['idLinen'];
+        $namaLinen = $request->dataLinen['namaLinen'];
+        // $satuanLinen = $request->dataLinen['satuanLinen'];
+
+        $arrayDataAlat = array(
+            "nama_linen" => $namaLinen
+            // "satuan_alat" => $satuanLinen
+        );
+        
+        $updateDataLinen = $this->laundryDb->edit('master_linen', $arrayDataAlat, $idLinen);
+        if (!$updateDataLinen) {
+            return $this->resultWithData("Gagal Update Data Linen", false, 200);
+        } else {
+            return $this->resultWithData($updateDataLinen, true, 200);
+        }
     }
 }

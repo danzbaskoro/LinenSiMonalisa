@@ -52,7 +52,7 @@
                     <tr>
                         <th class="text-dark fw-bold fs-6 text-center align-middle">No.</th>
                         <th class="text-dark fw-bold fs-6 text-start align-middle">Nama Linen</th>
-                        <th class="text-dark fw-bold fs-6 text-center align-middle">Satuan Linen</th>
+                        {{-- <th class="text-dark fw-bold fs-6 text-center align-middle">Satuan Linen</th> --}}
                         <th class="text-dark fw-bold fs-6 text-center align-middle">Aksi</th>
                     </tr>
                 </thead>
@@ -93,11 +93,11 @@
 										<span class="required">Nama Linen</span>
 									</label>
 									<!--end::Label-->
-									<input type="text" class="form-control form-control-solid" placeholder="Isikan nama linen" id="input_nama_linen" name="input_nama_linen" />
+									<input type="text" class="form-control form-control-solid" placeholder="Isikan nama Linen" id="input_nama_linen" name="input_nama_linen" />
 								</div>
 								<!--end::Input group-->
 								<!--begin::Input group-->
-								<div class="row g-9 mb-8">
+								{{-- <div class="row g-9 mb-8">
 									<!--begin::Col-->
 									<label class="required fs-6 fw-semibold mb-2">Satuan</label>
 									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih Satuan" name="input_satuan_linen" id="input_satuan_linen">
@@ -105,7 +105,7 @@
 										<option value="buah">Buah</option>
 									</select>
 									<!--end::Col-->
-								</div>
+								</div> --}}
 								<!--end::Input group-->
 								
 								<!--begin::Actions-->
@@ -168,15 +168,15 @@
 								</div>
 								<!--end::Input group-->
 								<!--begin::Input group-->
-								<div class="row g-9 mb-8">
+								{{-- <div class="row g-9 mb-8">
 									<!--begin::Col-->
 									<label class="required fs-6 fw-semibold mb-2">Satuan</label>
 									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih Satuan" name="edit_satuan_linen" id="edit_satuan_linen">
-										{{-- <option value="set">Set</option>
-										<option value="buah">Buah</option> --}}
+										<option value="set">Set</option>
+										<option value="buah">Buah</option>
 									</select>
 									<!--end::Col-->
-								</div>
+								</div> --}}
 								<!--end::Input group-->
 								
 								<!--begin::Actions-->
