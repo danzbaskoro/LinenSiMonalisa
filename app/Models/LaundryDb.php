@@ -45,7 +45,7 @@ class LaundryDb extends Model
 
     public function getDataLinen($filters, int $start, int $length, string $sortField, string $sortOrder)
     {
-        $q = sprintf("SELECT a.id, a.nama_linen
+        $q = sprintf("SELECT a.id, a.nama_linen, a.is_active
                             FROM master_linen a "
                     );
 
@@ -53,7 +53,7 @@ class LaundryDb extends Model
             $q .= sprintf(" where (a.nama_linen like '%%%s%%' )", $filters);
         }
 
-        $q .= sprintf(" where a.is_active = 1 order by %s %s limit %s offset %s", $sortField, $sortOrder, $length, $start);
+        $q .= sprintf("order by %s %s limit %s offset %s", $sortField, $sortOrder, $length, $start);
         $result = DB::connection('mysqlserver79')->select($q);
         return $result;
     }

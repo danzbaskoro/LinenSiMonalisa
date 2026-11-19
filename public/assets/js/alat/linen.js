@@ -17,7 +17,7 @@ function displayDataLinen() {
             pageLength: 10,
             aaSorting: [],
             columnDefs: [{
-                targets: [0, 2],
+                targets: [0, 2, 3],
                 className: "text-gray-800 fs-6 text-center"
             },{
                 targets: [1],
@@ -96,41 +96,45 @@ function SaveDataLinen() {
 
 function EditDataLinen(idLinen, dataLinen) {
     
-    // var dataLinenArr = dataLinen.split("|");
+    var dataLinenArr = dataLinen.split("|");
     // alert(dataAlatArr[1]);
-    // console.log(dataAlatArr);
+    // console.log(dataLinenArr);
+    // return false;
     $('#id_linen').val(idLinen);
-    $('#edit_nama_linen').val(dataLinen);
-    // $('#edit_nama_linen').val(dataLinenArr[0]);
-    // var option4 = '<option value="">Pilih Satuan</option>';
-    // if(dataLinenArr[1]=='buah'){
-    //     option4 += '<option value="' + dataLinenArr[1] + '" >Buah</option>';
-    //     option4 += '<option value="set" >Set</option>';
-    // }
-    // if(dataLinenArr[1]=='set'){
-    //     option4 += '<option value="' + dataLinenArr[1] + '" >Set</option>';
-    //     option4 += '<option value="buah" >Buah</option>';
-    // }
+    // $('#edit_nama_linen').val(dataLinen);
+    $('#edit_nama_linen').val(dataLinenArr[0]);
+    var option4 = '<option value="">Pilih Status</option>';
+    if(dataLinenArr[1]=='1'){
+        option4 += '<option value="' + dataLinenArr[1] + '" >Aktif</option>';
+        option4 += '<option value="0" >Tidak Aktif</option>';
+    }
+    if(dataLinenArr[1]=='0'){
+        option4 += '<option value="' + dataLinenArr[1] + '" >Tidak Aktif</option>';
+        option4 += '<option value="1" >Aktif</option>';
+    }
     
         
-    // $('#edit_satuan_linen').html(option4);
-    // $('#edit_satuan_linen').val(dataLinenArr[1]);
+    $('#edit_status_linen').html(option4);
+    $('#edit_status_linen').val(dataLinenArr[1]);
     $('#modal_edit_linen').modal('show');
 }
 
 function UpdateDataLinen() {
     var idLinen = $('#id_linen').val();
     var namaLinen = $('#edit_nama_linen').val();
-    // var satuanLinen = $('#edit_satuan_linen').val();
+    var statusLinen = $('#edit_status_linen').val();
         var dataLinen = {
             "idLinen": idLinen,
-            "namaLinen": namaLinen
-            // "satuanLinen": satuanLinen
+            "namaLinen": namaLinen,
+            "statusLinen": statusLinen
         }
 
         var model = {
             dataLinen: dataLinen
         };
+
+        // console.log(model);
+        // return false;
 
         $.ajax({
             type: 'POST',

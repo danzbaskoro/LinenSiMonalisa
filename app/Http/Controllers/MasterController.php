@@ -373,7 +373,7 @@ class MasterController extends Controller
             $a = array();
             $i = $request->start + 1;
             foreach ($result as $item) {
-                $data_name = $item->nama_linen;
+                $data_name = $item->nama_linen. "|" . $item->is_active;
                 $aksi = '<div class="w-100 text-center"><button type="button" class="btn btn-sm btn-flex btn-warning text-center" id="' . $item->id . '" name="' . $data_name . '" onclick=EditDataLinen(this.id,this.name)><i class="ki-outline ki-notepad-edit fs-3 ms-1"></i></button><button type="button" class="btn btn-sm btn-flex btn-danger ms-3 text-center" id="' . $item->id . '" name="' . $item->id . '" onclick=HapusDataLinen(this.id)><i class="ki-outline ki-cross-square fs-3 ms-1"></i></button></div>';
 
                 if (!empty($item->created_at)) {
@@ -384,7 +384,14 @@ class MasterController extends Controller
                     $item->updated_at = date('d-m-Y H:i:s', strtotime($item->updated_at));
                 }
 
-                $a = array($i, $item->nama_linen, $aksi);
+                // $status = $item->is_active;
+                if ($item->is_active == 1) {
+                    $tampilStatus = 'Aktif';
+                } else {
+                    $tampilStatus = 'Tidak Aktif';
+                }
+
+                $a = array($i, $item->nama_linen, $tampilStatus, $aksi);
                 array_push($ls, $a);
                 $i++;
             }
@@ -418,11 +425,11 @@ class MasterController extends Controller
         // $dataLinen = $request->dataLinen;
         $idLinen = $request->dataLinen['idLinen'];
         $namaLinen = $request->dataLinen['namaLinen'];
-        // $satuanLinen = $request->dataLinen['satuanLinen'];
+        $statusLinen = $request->dataLinen['statusLinen'];
 
         $arrayDataAlat = array(
-            "nama_linen" => $namaLinen
-            // "satuan_alat" => $satuanLinen
+            "nama_linen" => $namaLinen,
+            "is_active" => $statusLinen
         );
         
         $updateDataLinen = $this->laundryDb->edit('master_linen', $arrayDataAlat, $idLinen);

@@ -52,7 +52,7 @@
                     <tr>
                         <th class="text-dark fw-bold fs-6 text-center align-middle">No.</th>
                         <th class="text-dark fw-bold fs-6 text-start align-middle">Nama Linen</th>
-                        {{-- <th class="text-dark fw-bold fs-6 text-center align-middle">Satuan Linen</th> --}}
+                        <th class="text-dark fw-bold fs-6 text-center align-middle">Status</th>
                         <th class="text-dark fw-bold fs-6 text-center align-middle">Aksi</th>
                     </tr>
                 </thead>
@@ -168,15 +168,15 @@
 								</div>
 								<!--end::Input group-->
 								<!--begin::Input group-->
-								{{-- <div class="row g-9 mb-8">
+								<div class="row g-9 mb-8">
 									<!--begin::Col-->
-									<label class="required fs-6 fw-semibold mb-2">Satuan</label>
-									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih Satuan" name="edit_satuan_linen" id="edit_satuan_linen">
-										<option value="set">Set</option>
-										<option value="buah">Buah</option>
+									<label class="required fs-6 fw-semibold mb-2">Status</label>
+									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Pilih Status" name="edit_status_linen" id="edit_status_linen">
+										<option value="0">Tidak Aktif</option>
+										<option value="1">Aktif</option>
 									</select>
 									<!--end::Col-->
-								</div> --}}
+								</div>
 								<!--end::Input group-->
 								
 								<!--begin::Actions-->
