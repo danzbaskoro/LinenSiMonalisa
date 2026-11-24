@@ -110,6 +110,7 @@ class SterilDb extends Model
         }
         return DB::connection('mysqlserver79')->select($q)[0]->jumlah;
     }
+    
     public function getListTahun()
     {
         $tahun = DB::connection('mysqlserver79')->select("

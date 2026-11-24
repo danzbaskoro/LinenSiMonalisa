@@ -122,6 +122,7 @@ class SterilController extends Controller
         $result = array('draw' => $draw, 'recordsTotal' => $total, 'recordsFiltered' => $total, 'data' => $ls);
         return response()->json($result);
     }
+    
     public function getListRuangan()
     {
         

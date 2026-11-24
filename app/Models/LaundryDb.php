@@ -81,4 +81,120 @@ class LaundryDb extends Model
             return false;
         }
     }
+
+    public function getListTahun()
+    {
+        $tahun = DB::connection('mysqlserver79')->select("
+            SELECT DISTINCT YEAR(tgl_penyerahan_linen) AS tahun
+            FROM transaksi_linen
+            ORDER BY tahun DESC
+        ");
+
+        $list = collect($tahun)->pluck('tahun')->toArray();
+
+        if (!in_array(date('Y'), $list)) {
+            array_unshift($list, date('Y'));
+        }
+
+        rsort($list);
+
+        return collect($list)->map(function ($item) {
+            return (object)['tahun' => $item];
+        });
+    }
+
+    public function getDataLinenAdm($search, $tahun, $start, $length, $sortField, $sortOrder)
+    {
+        $q = "
+            WITH DataLinenAdm AS
+            (
+                SELECT
+
+                    ROW_NUMBER() OVER
+                    (
+                        PARTITION BY s.kode_linen
+                        ORDER BY s.id ASC
+                    ) AS rn,
+
+                    s.id,
+                    s.kode_linen,
+                    r.nama_ruang,
+                    s.tgl_penyerahan_linen,
+                    s.status_pengambilan,
+                    s.p_pencucian,
+                    s.tgl_pengembalian_linen
+
+                FROM transaksi_linen s
+                LEFT JOIN tb_ruang r
+                    ON s.id_ruangan = r.id_ruang
+
+                WHERE 1=1
+        ";
+        // if (!empty($filters)) {
+        //     $q .= sprintf(" where (r.nama_ruang like '%%%s%%' )", $filters);
+        // }
+        if (!empty($search)) {
+
+            $q .= " AND (
+                    r.nama_ruang LIKE '%$search%'
+                    OR s.kode_linen LIKE '%$search%'
+                )";
+        }
+        if (!empty($tahun) && $tahun != 'all') {
+            $q .= " AND YEAR(s.tgl_penyerahan_linen) = '$tahun'";
+        }
+
+        // if (!empty($status) && $status != 'all') {
+        //     if ($status == 'Kadaluarsa') {
+        //         $q .= " AND s.tgl_kadaluarsa < GETDATE()";
+        //     } else {
+        //         $q .= " AND s.status_pengambilan = '$status'";
+        //     }
+        // }
+        // if (!empty($ruang)) {
+        //     $q .= " AND s.id_ruang='$ruang'";
+        // }
+        $q .= "
+            )
+
+            SELECT *
+            FROM DataLinenAdm
+            WHERE rn = 1
+
+            ORDER BY
+            $sortField $sortOrder
+
+            OFFSET $start ROWS
+            FETCH NEXT $length ROWS ONLY
+            ";
+        $result = DB::connection('mysqlserver79')->select($q);
+        return $result;
+    }
+
+    public function getTotalDataLinenAdm($search, $tahun)
+    {
+        $q = "
+            SELECT COUNT(DISTINCT s.kode_linen) AS jumlah
+            FROM transaksi_linen s
+            LEFT JOIN tb_ruang r
+                ON s.id_ruangan = r.id_ruang
+            WHERE 1=1
+        ";
+
+        // Search
+        if (!empty($search)) {
+            $q .= " AND (
+                        r.nama_ruang LIKE '%$search%'
+                        OR s.kode_linen LIKE '%$search%'
+                    )";
+        }
+
+        // Tahun
+        if (!empty($tahun) && $tahun != 'all') {
+            $q .= " AND YEAR(s.tgl_penyerahan_linen) = '$tahun'";
+        }
+
+        return DB::connection('mysqlserver79')->select($q)[0]->jumlah;
+    }
+
 }

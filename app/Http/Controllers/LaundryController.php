@@ -31,7 +31,7 @@ class LaundryController extends Controller
     {
         $tahunList = $this->laundryDb->getListTahun();
 
-        return view('laundry.linen', compact('tahunList'));
+        return view('laundry.data-laundry', compact('tahunList'));
     }
 
     public function viewTambahLinen()
@@ -90,6 +90,91 @@ class LaundryController extends Controller
         } else {
             return $this->resultWithData($arrayDataAjuanLinen, true, 200);
         }
+    }
+
+    public function getDataLinen(Request $request)
+    {
+        $result = array();
+        $ls = array();
+        $draw = $request->draw;
+        // $filters = $request->search['value'];
+        // $start = $request->start ?? 0;
+        // $length = $request->length ?? 10;
+        $filters = $request->search['value'];
+
+        $tahun = $request->tahun;
+        $status = $request->status;
+        // $ruang = $request->ruang ?? '';
+
+        $start = $request->start ?? 0;
+        $length = $request->length ?? 10;
+        $kolom = 'kode_linen';
+        $order = 'desc';
+        if ($request->order ?? false) {
+            $kolom = $request->order[0]['column'];
+            $order = $request->order[0]['dir'];
+        }
+
+        $result = $this->laundryDb->getDataLinenAdm(
+                        $filters,
+                        $tahun,
+                        // $status,
+                        $start,
+                        $length,
+                        $kolom,
+                        $order
+                    );
+        $total = $this->laundryDb->getTotalDataLinenAdm(
+            $filters,
+            $tahun
+            // $status
+        );
+
+        if ($total > 0) {
+            $a = array();
+            $i = $request->start + 1;
+            foreach ($result as $item) {
+                $data_name = $item->kode_linen . "|" . $item->tgl_penyerahan_linen;
+                if ($item->status_pengambilan == 'Sudah diambil' && isset($item->tgl_pengembalian_linen) && $item->tgl_pengembalian_linen!='0000-00-00') {
+                    $pdfFormulir='
+                     <button type="button" class="btn btn-sm btn-flex btn-primary ms-3 text-center" id="' . $item->kode_linen . '" name="' . $item->kode_linen . '" onclick=CetakDataLaundry(this.id)><i class="ki-outline ki-file fs-3 ms-1"></i></button>';
+                 }
+                 else
+                 {
+                    $pdfFormulir='
+                     <button type="button" class="btn btn-sm btn-flex btn-default ms-3 text-center" id="' . $item->kode_linen . '" name="' . $item->kode_linen . '" ><i class="ki-outline ki-file fs-3 ms-1"></i></button>';
+                 }
+                 if($item->p_pencucian!=null){
+                    $editButton ='<button type="button" class="btn btn-sm btn-flex btn-warning ms-3 text-center" id="' . $item->kode_linen . '" name="' . $data_name . '" onclick=EditDataPengambilan(this.id,this.name)><i class="ki-outline ki-scan-barcode fs-3 ms-1"></i></button>';
+                 }
+                 else
+                 {
+                    $editButton='';
+                 }
+                $aksi = '<div class="w-100 text-center">' . $editButton . '<button type="button" class="btn btn-sm btn-flex btn-success ms-3 text-center" id="' . $item->kode_linen . '" name="' . $data_name . '" onclick=EditDataLaundry(this.id,this.name)><i class="ki-outline ki-notepad-edit fs-3 ms-1"></i></button><button type="button" class="btn btn-sm btn-flex btn-danger ms-3 text-center" id="' . $item->kode_linen . '" name="' . $item->kode_linen . '" onclick=HapusDataLaundry(this.id)><i class="ki-outline ki-cross-square fs-3 ms-1"></i></button></button>' . $pdfFormulir . '</div>';
+                
+                
+                // $aksi = '<div class="w-100 text-center"><button type="button" class="btn btn-sm btn-flex btn-success ms-3 text-center" id="' . $item->kode_steril . '" name="' . $data_name . '" onclick=EditDataSteril(this.id,this.name)><i class="ki-outline ki-notepad-edit fs-3 ms-1"></i></button><button type="button" class="btn btn-sm btn-flex btn-warning text-center" id="' . $item->kode_steril . '" name="' . $data_name . '" onclick=DetailDataSteril(this.id,this.name)><i class="ki-outline ki-eye fs-3 ms-1"></i></button><button type="button" class="btn btn-sm btn-flex btn-danger ms-3 text-center" id="' . $item->kode_steril . '" name="' . $item->kode_steril . '" onclick=HapusDataSteril(this.id)><i class="ki-outline ki-cross-square fs-3 ms-1"></i></button></div>';
+
+                // $barcode='<div class="w-100 text-center">
+                // <button type="button" class="btn btn-sm btn-flex btn-success text-center" id="' . $item->kode_steril . '" name="' . $data_name . '" onclick=EditDataSteril(this.id,this.name)><i class="ki-outline ki-scan-barcode fs-3 ms-1"></i></button></div>';
+
+                if (!empty($item->created_at)) {
+                    $item->created_at = date('d-m-Y H:i:s', strtotime($item->created_at));
+                }
+
+                if (!empty($item->updated_at)) {
+                    $item->updated_at = date('d-m-Y H:i:s', strtotime($item->updated_at));
+                }
+
+                $a = array($i, $item->kode_linen, $item->nama_ruang, $item->tgl_penyerahan_linen,$item->status_pengambilan, $aksi);
+                array_push($ls, $a);
+                $i++;
+            }
+        }
+
+        $result = array('draw' => $draw, 'recordsTotal' => $total, 'recordsFiltered' => $total, 'data' => $ls);
+        return response()->json($result);
     }
 
 }
